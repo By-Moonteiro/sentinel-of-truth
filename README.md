@@ -38,10 +38,10 @@ sentinel-of-truth/
 │   └── salved_news.json
 │
 ├── src/
-│   ├── __init__.py
 │   ├── core/               # Classes e lógica principal
 │   │   ├── __init__.py
 │   │   ├── manager.py
+│   │   ├── report.py
 │   │   └── news.py
 │   └── utils/              # Funções auxiliares
 │       ├── __init__.py

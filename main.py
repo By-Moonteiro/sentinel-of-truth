@@ -1,9 +1,10 @@
-from src.core import Noticia
-from src.utils import save_date, load_date, menu_validation
+from src.core import News  # noqa: F401
+from src.utils import menu_validation
 
-def main():
-    running = True
+
+def main() -> None:
     """Menu Principal"""
+    running = True
     while running:
         print("\n╔══════════════════════════════╗")
         print("║      SENTINEL OF TRUTH       ║")
@@ -17,12 +18,10 @@ def main():
         option = input("➤ Escolha uma opção: ")
         menu_validation(option)
 
-
-
         match option:
             case 1:
                 print("...")
-        
+
             case 2:
                 print("...")
 
@@ -31,7 +30,7 @@ def main():
 
             case 4:
                 print("...")
-        
+
             case 5:
                 print("Encerrando o sistema..")
                 running = False

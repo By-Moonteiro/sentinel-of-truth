@@ -1,32 +1,31 @@
-def menu_validation(op: int):
+def menu_validation(op: str) -> int:
     """
-    Verifica:  
-    - Se é inteiro  
-    - Se não é um caractere  
-    - Se esta entre 1 e 5  
+    Verifica se é uma opção válida e retorna como inteiro
 
-    Retorna:
-    - Opção Válida
-    
+    Args:
+       op(str): Entrada do usuário.
+
+    Returns:
+        int: Opção válida convertida para inteiro.
+
     """
     valid = False
     while not valid:
         try:
             opc = int(op)
-            
+
             if 1 <= opc <= 5:
                 print("deu certo")
                 valid = True
                 return opc
-                
+
             else:
                 print("╔════════════════════════════════════════════════╗")
-                print("➤ Opção inválida! Escolha uma opção entre 1 e 5.");
+                print("➤ Opção inválida! Escolha uma opção entre 1 e 5.")
                 print("╚════════════════════════════════════════════════╝")
 
         except ValueError:
             print("╔════════════════════════════════════════════════╗")
-            print("➤ Opção inválida! Escolha uma opção entre 1 e 5.");
+            print("➤ Opção inválida! Escolha uma opção entre 1 e 5.")
             print("╚════════════════════════════════════════════════╝")
         op = input("➤ Escolha uma opção: ")
-

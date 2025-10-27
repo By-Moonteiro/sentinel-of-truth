@@ -16,3 +16,7 @@ venv/
 # Sistema
 .DS_Store
 *.log
+
+# Ruff
+.ruff_cache/
+.ruff
