@@ -1,4 +1,4 @@
-from src.core import News  # noqa: F401
+from src.logic import News  # noqa: F401
 from src.utils import menu_validation
 
 
@@ -16,14 +16,36 @@ def main() -> None:
         print("║ 5 - Encerar o programa       ║")
         print("╚══════════════════════════════╝")
         option = input("➤ Escolha uma opção: ")
-        menu_validation(option)
+
+        option = menu_validation(option, 1, 5)
 
         match option:
             case 1:
                 print("...")
 
             case 2:
-                print("...")
+                print("\n╔═════════════════════════════════╗")
+                print("║            CHECK NEWS           ║")
+                print("╠═════════════════════════════════╣")
+                print("║ 1 - Ver todas as notícias       ║")
+                print("║ 2 - Ver notícias VERDADEIRAS    ║")
+                print("║ 3 - Ver notícias FALSAS         ║")
+                print("║ 4 - Ver notícias NÃO CHECADAS   ║")
+                print("║ 5 - Retornar                    ║")
+                print("╚═════════════════════════════════╝")
+                sub_option = input("➤ Escolha uma opção: ")
+                sub_option = menu_validation(sub_option, 1, 5)
+                
+                if sub_option == 1:
+                    pass
+                elif sub_option == 2:
+                    pass
+                elif sub_option == 3:
+                    pass
+                elif sub_option == 4:
+                    pass
+                elif sub_option == 5:
+                    continue
 
             case 3:
                 print("...")
@@ -34,3 +56,7 @@ def main() -> None:
             case 5:
                 print("Encerrando o sistema..")
                 running = False
+
+
+if __name__ == "__main__":
+    main()

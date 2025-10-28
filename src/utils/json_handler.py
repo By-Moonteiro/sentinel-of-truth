@@ -1,5 +1,7 @@
 import json
 
+from .config import DADOS
+
 
 def save_date(noticias: dict, dados: str) -> None:
     """
@@ -16,11 +18,13 @@ def save_date(noticias: dict, dados: str) -> None:
         with open(dados, "a", encoding="utf-8") as arquivo:  # Tenta escrever a notícia
             json.dump(noticias, arquivo, ensure_ascii=False, indent=2)
 
+    # Caso nao consiga ele cria um arquivo para salvar as notícias novas
     except (
         PermissionError,
         FileNotFoundError,
-    ):  # Caso nao consiga ele cria um arquivo para salvar as notícias novas
+    ):  
         print("Falha ao sobrescrever o arquivo salved_news.json..")
+
         with open("data/salved_news_backup", "w", encoding="utf-8") as backup:
             json.dump(noticias, backup, ensure_ascii=False, indent=2)
 
@@ -42,11 +46,12 @@ def load_date(arquivo: str) -> dict:
         with open(arquivo, "r") as dados:
             noticias = json.load(dados)  # noqa: F841
 
+    # Caso o arquivo não exista/esteja corrompido
     except (
         FileNotFoundError,
         json.JSONDecodeError,
-    ):  # Caso o arquivo não exista/esteja corrompido
-        print("Arquivo não encontrado. Criando novo:")
+    ):  
+        print("Arquivo não encontrado.")
         return {}  # <- Cria um dicionario vazio
 
 

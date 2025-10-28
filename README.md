@@ -38,7 +38,7 @@ sentinel-of-truth/
 │   └── salved_news.json
 │
 ├── src/
-│   ├── core/               # Classes e lógica principal
+│   ├── logic/               # Classes e lógica principal
 │   │   ├── __init__.py
 │   │   ├── manager.py
 │   │   ├── report.py
