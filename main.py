@@ -1,5 +1,7 @@
-from src.logic import News  # noqa: F401
-from src.utils import menu_validation
+from src.logic.news import News
+from src.logic.manager import ManageNews
+from src.utils.json_handler import Handler
+from src.utils.validation import menu_validation 
 
 
 def main() -> None:
@@ -21,7 +23,7 @@ def main() -> None:
 
         match option:
             case 1:
-                print("...")
+                ManageNews.register_news()
 
             case 2:
                 print("\n╔═════════════════════════════════╗")
@@ -37,13 +39,18 @@ def main() -> None:
                 sub_option = menu_validation(sub_option, 1, 5)
                 
                 if sub_option == 1:
-                    pass
+                    noticias = Handler.load_date()
+                    print(noticias)
+
                 elif sub_option == 2:
                     pass
+
                 elif sub_option == 3:
                     pass
+
                 elif sub_option == 4:
                     pass
+
                 elif sub_option == 5:
                     continue
 

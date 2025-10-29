@@ -3,12 +3,11 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.utils.json_handler import save_date, load_date
-from src.utils.config import DADOS
+from src.utils.json_handler import Handler
+from src.logic.manager import ManageNews
 
-dic = {
-    "nome": "Wagner", 
-    "idade": 21
-}
 
-save_date(dic, DADOS)
+def test_register_news():
+    ManageNews.register_news()
+
+test_register_news()
