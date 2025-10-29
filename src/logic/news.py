@@ -10,3 +10,9 @@ class News:
     def __init__(self, url: str, status: str = "Não Checada"):
         self.url = url
         self.status = status
+
+    def to_dict(self):
+        return {
+            "url": self.url,
+            "status": self.status
+        }

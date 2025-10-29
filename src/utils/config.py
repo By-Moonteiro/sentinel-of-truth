@@ -1,4 +1,3 @@
-import os
+from pathlib import Path
 
-
-DADOS = os.path.join("data", "salved_news.json")
+DADOS = Path(__file__).parent.parent.parent / "data" / "saved_news.json"
