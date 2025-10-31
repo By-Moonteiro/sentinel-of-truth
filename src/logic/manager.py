@@ -76,16 +76,12 @@ class ManageNews:
        
         Handler.save_date(manager.news)
 
-    def update_news(self, id_news: str, new_status: str) -> bool:
+    def update_news(self) -> bool:
         """
         Atualiza os status de uma notícia existente.
 
-        Args:
-            id_news: ID da noticia que vai ser atualizada
-            new_status: Novo status para a notícia
-
         Returns:
-            bool: True se atualizou, False se a noticia nao existe
+            bool: True se atualizou, False se não atualizou
         """
         loaded_news = Handler.load_date()
 
@@ -117,9 +113,20 @@ class ManageNews:
         Busca todas as notícias com um status especifico.
 
         Args:
-            status: Status para filtrar (ex: "Verdadeiro", "Falso")
+            status: Status para filtrar (ex: "Verdadeiro", ... , "Não Checado".)
 
         Returns:
             list: Lista de Noticias com o status especifico
         """
-        pass
+        loaded_news = Handler.load_date()
+        filter_status = []
+
+        for id_news, news in loaded_news.items():
+            if news[1] == status:
+                filter_status.append({
+                        "id": id_news,
+                        "url": news[0],
+                        "status": news[1]
+                    })
+        
+        return filter_status
