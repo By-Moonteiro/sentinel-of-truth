@@ -11,8 +11,6 @@ class News:
         self.url = url
         self.status = status
 
-    def to_dict(self):
-        return {
-            "url": self.url,
-            "status": self.status
-        }
+    def to_list(self):
+        return [[self.url], [self.status]]
+            
