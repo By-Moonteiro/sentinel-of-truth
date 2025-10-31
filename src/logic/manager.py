@@ -70,8 +70,8 @@ class ManageNews:
         status = int(input("STATUS: "))
 
         news = News(url, status)
-        news_to_dict = news.to_dict() # Converte pra dicionário
-        manager.add_news(news_to_dict)
+        news_to_list = news.to_list() # Converte para lista
+        manager.add_news(news_to_list)
        
         Handler.save_date(manager.news)
 
