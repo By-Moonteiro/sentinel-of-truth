@@ -1,3 +1,6 @@
+from .config import STATUS
+
+
 def menu_validation(opc: str, start: int, end: int) -> int:
     """
     Verifica se é uma opção válida e retorna como inteiro
@@ -29,3 +32,7 @@ def menu_validation(opc: str, start: int, end: int) -> int:
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
             print("╚════════════════════════════════════════════════╝")
         opc = input("➤ Escolha uma opção: ")
+
+def status(status: str, opc: dict) -> str:
+    if status == "1":
+        return 
