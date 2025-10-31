@@ -34,7 +34,7 @@ def main() -> None:
                 print("║ 4 - Ver notícias NÃO CHECADAS   ║")
                 print("║ 5 - Retornar                    ║")
                 print("╚═════════════════════════════════╝")
-                
+
                 sub_option = input("➤ Escolha uma opção: ")
                 sub_option = menu_validation(sub_option, 1, 5)
 
@@ -42,13 +42,16 @@ def main() -> None:
                     noticias = Handler.load_date()
 
                 elif sub_option == 2:
-                    ManageNews.search_status_news("Verdadeiro")
+                    verdadeiras = ManageNews.search_status_news("Verdadeiro")
+                    ManageNews.display_news("Verdadeiro")
 
                 elif sub_option == 3:
-                    ManageNews.search_status_news("Falso")
+                    falsas = ManageNews.search_status_news("Falso")
+                    ManageNews.display_news("Falso")
 
                 elif sub_option == 4:
-                    ManageNews.search_status_news("Não Checado")
+                    nao_checadas = ManageNews.search_status_news("Não Checado")
+                    ManageNews.display_news("Não Checado")
 
                 elif sub_option == 5:
                     continue
