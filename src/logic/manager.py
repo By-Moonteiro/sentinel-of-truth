@@ -115,27 +115,16 @@ class ManageNews:
             list: Lista de Noticias com o status especifico
         """
         loaded_news = Handler.load_date()
-        filter_status = []
+        filter_status = {}
 
         for id_news, news in loaded_news.items():
             if news[1] == status:
-                filter_status.append({"id": id_news, "url": news[0], "status": news[1]})
+                filter_status[id_news] = {
+                    "url": news[0],
+                    "status": news[1]
+                }
 
         return filter_status
-
-
-    def display_news_status(self, noticias: list) -> None:
-        """
-        Exibe cada notícia formatada.
-
-        Args:
-            noticias(list): Lista de notícias para exibir
-
-        Returns:
-            None: Função apenas exibe output na tela
-        """
-        for noticia in noticias:
-            print(f"ID: {noticia["id"]} | URL: {noticia["url"]} | Status: {noticia["status"]}\n")
 
 
     def display_news(self, noticias: dict) -> None:
