@@ -1,5 +1,6 @@
 from .news import News
 from src.utils.json_handler import Handler
+from src.utils.validation import valid_status
 
 
 def id_generation(news: dict) -> int:
@@ -67,7 +68,8 @@ class ManageNews:
 
         url = input("URL: ")
         print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
-        status = int(input("STATUS: "))
+        status = valid_status()
+
 
         news = News(url, status)
         news_to_list = news.to_list() # Converte para lista
