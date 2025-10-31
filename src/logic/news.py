@@ -19,4 +19,3 @@ class News:
             list: lista com os atributos
         """
         return [self.url, self.status]
-            

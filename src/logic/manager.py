@@ -21,8 +21,8 @@ def id_generation(news: dict) -> int:
         int_key = int(key)
         if int_key > max_id:
             max_id = int_key
-            
-    return max_id + 1 # Retorna o maior id + 1
+
+    return max_id + 1  # Retorna o maior id + 1
 
 
 class ManageNews:
@@ -53,27 +53,25 @@ class ManageNews:
         next_id = id_generation(self.news)
         self.news[next_id] = noticia
 
-
     def register_news() -> None:
         """
         Gerencia todo o registro.
         """
 
         manager = ManageNews()
-        loaded_news = Handler.load_date() # Carrega os arquivos
+        loaded_news = Handler.load_date()  # Carrega os arquivos
 
-        if loaded_news: # Coloca as existentes no gerenciador
+        if loaded_news:  # Coloca as existentes no gerenciador
             manager.news = loaded_news
-
 
         url = input("URL: ")
         print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
         status = valid_status()
 
         news = News(url, status)
-        news_to_list = news.to_list() # Converte os atributos para lista
-        manager.add_news(news_to_list) # Adiciona a lista à um dicionario
-       
+        news_to_list = news.to_list()  # Converte os atributos para lista
+        manager.add_news(news_to_list)  # Adiciona a lista à um dicionario
+
         Handler.save_date(manager.news)
 
     def update_news(self) -> bool:
@@ -95,18 +93,16 @@ class ManageNews:
                 news = loaded_news[id]
 
                 print(f"O Status atual é: {news[1]}")
-                new_status = valid_status() # <- Pega o novo status
+                new_status = valid_status()  # <- Pega o novo status
                 news[1] = new_status
                 print("Status Atualizado Com Sucesso!")
 
                 Handler.save_date(loaded_news)
 
                 return True
-           
+
             else:
                 print("ID não encontrado. Tente outro ID")
-                    
-                        
 
     def search_status_news(self, status: str) -> list:
         """
@@ -123,10 +119,6 @@ class ManageNews:
 
         for id_news, news in loaded_news.items():
             if news[1] == status:
-                filter_status.append({
-                        "id": id_news,
-                        "url": news[0],
-                        "status": news[1]
-                    })
-        
+                filter_status.append({"id": id_news, "url": news[0], "status": news[1]})
+
         return filter_status

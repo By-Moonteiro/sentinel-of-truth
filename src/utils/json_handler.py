@@ -2,8 +2,8 @@ import json
 
 from .config import DADOS, DADOS_BACKUP
 
-class Handler:
 
+class Handler:
     def save_date(noticias: dict) -> None:
         """
         Salva notícias em arquivo JSON
@@ -13,9 +13,11 @@ class Handler:
 
         Returns:
             None: Salva com sucesso
-        """ 
+        """
         try:
-            with open(DADOS, "w", encoding="utf-8") as arquivo:  # Tenta escrever a notícia
+            with open(
+                DADOS, "w", encoding="utf-8"
+            ) as arquivo:  # Tenta escrever a notícia
                 json.dump(noticias, arquivo, ensure_ascii=False, indent=2)
             print("Salvo com sucesso!")
 
@@ -23,7 +25,7 @@ class Handler:
         except (
             PermissionError,
             FileNotFoundError,
-        ):  
+        ):
             print("Falha ao sobrescrever o arquivo salved_news.json..")
             # Cria Backup
             with open(DADOS_BACKUP, "w", encoding="utf-8") as backup:
@@ -31,7 +33,6 @@ class Handler:
 
         except Exception as e:
             print(f"Erro inesperado: {e}")
-
 
     def load_date() -> dict:
         """
@@ -45,19 +46,12 @@ class Handler:
         """
         try:
             with open(DADOS, "r", encoding="utf-8") as dados:
-
                 return json.load(dados)
 
         # Caso o arquivo não exista/esteja corrompido
         except (
             FileNotFoundError,
             json.JSONDecodeError,
-        ):  
+        ):
             print("Arquivo vazio...")
             return {}  # <- Cria um dicionario vazio
-
-
-    def update_date():
-        pass
-
-

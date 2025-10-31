@@ -33,17 +33,18 @@ def menu_validation(opc: str, start: int, end: int) -> int:
             print("╚════════════════════════════════════════════════╝")
         opc = input("➤ Escolha uma opção: ")
 
-def valid_status() -> str:
-        """
-        Solicita e valida o status do usuário
-        
-        Returns:
-            status(str): status válido
-        """
-        while True:
-            status = input("STATUS: ")
 
-            if status in ["1", "2", "3"]:
-                return STATUS.get(status)
-            
-            print("Opção invalida! Digite 1, 2 ou 3\n")
+def valid_status() -> str:
+    """
+    Solicita e valida o status do usuário
+
+    Returns:
+        status(str): status válido
+    """
+    while True:
+        status = input("STATUS: ")
+
+        if status in ["1", "2", "3"]:
+            return STATUS.get(status)
+
+        print("Opção invalida! Digite 1, 2 ou 3\n")

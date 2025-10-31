@@ -1,7 +1,6 @@
-from src.logic.news import News
 from src.logic.manager import ManageNews
 from src.utils.json_handler import Handler
-from src.utils.validation import menu_validation 
+from src.utils.validation import menu_validation
 
 
 def main() -> None:
@@ -37,7 +36,7 @@ def main() -> None:
                 print("╚═════════════════════════════════╝")
                 sub_option = input("➤ Escolha uma opção: ")
                 sub_option = menu_validation(sub_option, 1, 5)
-                
+
                 if sub_option == 1:
                     noticias = Handler.load_date()
                     print(noticias)
