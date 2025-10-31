@@ -12,5 +12,5 @@ class News:
         self.status = status
 
     def to_list(self):
-        return [[self.url], [self.status]]
+        return [self.url, self.status]
             
