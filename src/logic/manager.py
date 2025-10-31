@@ -104,7 +104,7 @@ class ManageNews:
             else:
                 print("ID não encontrado. Tente outro ID")
 
-    def search_status_news(self, status: str) -> list:
+    def search_status_news(self, status: str) -> dict:
         """
         Busca todas as notícias com um status especifico.
 
@@ -112,7 +112,7 @@ class ManageNews:
             status: Status para filtrar (ex: "Verdadeiro", ... , "Não Checado".)
 
         Returns:
-            list: Lista de Noticias com o status especifico
+            dict: Dicionário de Noticias com o status especifico
         """
         loaded_news = Handler.load_date()
         filter_status = {}
