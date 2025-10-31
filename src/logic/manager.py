@@ -70,25 +70,47 @@ class ManageNews:
         print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
         status = valid_status()
 
-
         news = News(url, status)
-        news_to_list = news.to_list() # Converte para lista
-        manager.add_news(news_to_list)
+        news_to_list = news.to_list() # Converte os atributos para lista
+        manager.add_news(news_to_list) # Adiciona a lista à um dicionario
        
         Handler.save_date(manager.news)
 
-    def update_news(self, id_news: int, news_status: str) -> bool:
+    def update_news(self, id_news: str, new_status: str) -> bool:
         """
         Atualiza os status de uma notícia existente.
 
         Args:
             id_news: ID da noticia que vai ser atualizada
-            news_status: Novo status para a notícia
+            new_status: Novo status para a notícia
 
         Returns:
             bool: True se atualizou, False se a noticia nao existe
         """
-        pass
+        loaded_news = Handler.load_date()
+
+        while True:
+            id_news = input("Digite o ID da notícia (ou '0' para cancelar): ")
+
+            if id_news == "0":
+                return False
+
+            elif id_news in loaded_news:
+                news = loaded_news[id]
+
+                print(f"O Status atual é: {news[1]}")
+                new_status = valid_status() # <- Pega o novo status
+                news[1] = new_status
+                print("Status Atualizado Com Sucesso!")
+
+                Handler.save_date(loaded_news)
+
+                return True
+           
+            else:
+                print("ID não encontrado. Tente outro ID")
+                    
+                        
 
     def search_status_news(self, status: str) -> list:
         """
