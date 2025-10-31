@@ -44,7 +44,7 @@ class Handler:
             dict: Dicionário com as notícias
         """
         try:
-            with open(DADOS, "r") as dados:
+            with open(DADOS, "r", encoding="utf-8") as dados:
 
                 return json.load(dados)
 
