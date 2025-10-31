@@ -1,6 +1,6 @@
 import json
 
-from .config import DADOS
+from .config import DADOS, DADOS_BACKUP
 
 class Handler:
 
@@ -26,7 +26,7 @@ class Handler:
         ):  
             print("Falha ao sobrescrever o arquivo salved_news.json..")
             # Cria Backup
-            with open("data/salved_news_backup", "w", encoding="utf-8") as backup:
+            with open(DADOS_BACKUP, "w", encoding="utf-8") as backup:
                 json.dump(noticias, backup, ensure_ascii=False, indent=2)
 
         except Exception as e:
