@@ -31,7 +31,7 @@ def menu_validation(opc: str, start: int, end: int) -> int:
             print("╔════════════════════════════════════════════════╗")
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
             print("╚════════════════════════════════════════════════╝")
-        opc = input("➤ Escolha uma opção: ")
+        opc = input("➤ Escolha uma opção: ").strip()
 
 
 def valid_status() -> str:
@@ -42,7 +42,7 @@ def valid_status() -> str:
         status(str): status válido
     """
     while True:
-        status = input("STATUS: ")
+        status = input("STATUS: ").strip()
 
         if status in ["1", "2", "3"]:
             return STATUS.get(status)
