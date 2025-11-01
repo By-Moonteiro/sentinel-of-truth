@@ -1,6 +1,6 @@
 import json
 
-from .config import DADOS, DADOS_BACKUP
+from .config import DATA, DATA_BACKUP
 
 
 class Handler:
@@ -16,7 +16,7 @@ class Handler:
         """
         try:
             with open(
-                DADOS, "w", encoding="utf-8"
+                DATA, "w", encoding="utf-8"
             ) as arquivo:  # Tenta escrever a notícia
                 json.dump(noticias, arquivo, ensure_ascii=False, indent=2)
             print("Salvo com sucesso!")
@@ -28,7 +28,7 @@ class Handler:
         ):
             print("Falha ao sobrescrever o arquivo salved_news.json..")
             # Cria Backup
-            with open(DADOS_BACKUP, "w", encoding="utf-8") as backup:
+            with open(DATA_BACKUP, "w", encoding="utf-8") as backup:
                 json.dump(noticias, backup, ensure_ascii=False, indent=2)
 
         except Exception as e:
@@ -45,7 +45,7 @@ class Handler:
             dict: Dicionário com as notícias
         """
         try:
-            with open(DADOS, "r", encoding="utf-8") as dados:
+            with open(DATA, "r", encoding="utf-8") as dados:
                 return json.load(dados)
 
         # Caso o arquivo não exista/esteja corrompido
