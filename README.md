@@ -1,8 +1,8 @@
 # Sentinel of Truth
 
-`projeto da faculdade` = `Em andamento`
+`projeto da faculdade` = `Concluído`
 
-**Status:** `🚧 Em desenvolvimento`
+**Status:** `✅ Completo - Funcional`
 
 **Descrição do Projeto/Problema:** É preciso construir um sistema simples, direto e eficiente para organizar o banco de dados
 de notícias que serão analisadas por jornalistas. Precisam de um programa direto ao ponto, que
@@ -21,7 +21,7 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 - `Python 3.13.7`
 - `Programação Orientada a Objetos (POO)`
 - `Módulos e Pacotes`
-- `Persistência de dados com JSON/TXT`
+- `Persistência de dados`
 - `Estrutura de projeto modular`
 
 ## 🏗️ Estrutura do Projeto
@@ -30,14 +30,16 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 sentinel-of-truth/
 │
 ├── main.py                 # Ponto de entrada do programa
-├── requirements.txt        # Dependências do projeto
+├── requirements.txt        # Dependências do projeto (vazio)
 ├── README.md
 ├── .gitignore
 │
-├── data/                   # Dados salvos (JSON)
-│   └── salved_news.json
+├── data/                      # Dados salvos
+│   ├── relatorio.txt          # <- relatório gerado      
+│   └── salved_news.json       # <- Notícias salvas
 │
 ├── src/
+│   ├── __init__.py
 │   ├── logic/               # Classes e lógica principal
 │   │   ├── __init__.py
 │   │   ├── manager.py
@@ -70,7 +72,7 @@ python main.py
 
 ## 📈 Futuros Passos
 
-- [ ]  ...
+- [ ]  Adicionar mais requisitos
 - [ ]  ...
 - [ ]  ...
 - [ ]  ...
@@ -80,5 +82,5 @@ python main.py
 - [X] POO
 - [X] Docstring
 - [X] Manipulação de Arquivos .json | Geração de arquivos .txt
-- [X] ...
-- [X] ..
+- [X] CRUD simples
+- [X] Tipagem
