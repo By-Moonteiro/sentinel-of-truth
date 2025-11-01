@@ -1,10 +1,15 @@
 from src.logic.manager import ManageNews
 from src.utils.json_handler import Handler
 from src.utils.validation import menu_validation
+from src.logic.report import ReportNews
+from src.utils.config import clear_screen
 
 
 def main() -> None:
     """Menu Principal"""
+    
+    manager = ManageNews() # <- instância
+
     running = True
     while running:
         print("\n╔══════════════════════════════╗")
@@ -22,9 +27,11 @@ def main() -> None:
 
         match option:
             case 1:
-                ManageNews.register_news()
+                manager.register_news()
 
             case 2:
+                clear_screen()
+
                 print("\n╔═════════════════════════════════╗")
                 print("║            CHECK NEWS           ║")
                 print("╠═════════════════════════════════╣")
@@ -39,28 +46,57 @@ def main() -> None:
                 sub_option = menu_validation(sub_option, 1, 5)
 
                 if sub_option == 1:
+                    clear_screen()
+                    print("=" * 60)
+                    print("{:^60}".format("TODAS AS NOTÍCIAS\n"))
+                    print("=" * 60)
                     noticias = Handler.load_date()
+                    manager.display_news(noticias)
+                    print("=" * 60)
+                    input("\nPronto para voltar? (Enter)")
 
                 elif sub_option == 2:
-                    verdadeiras = ManageNews.search_status_news("Verdadeiro")
-                    ManageNews.display_news("Verdadeiro")
+                    clear_screen()
+                    print("=" * 60)
+                    print("{:^60}".format("NOTÍCIAS_VERDADEIRAS\n"))
+                    print("=" * 60)
+                    verdadeiras = manager.search_status_news("Verdadeiro")
+                    manager.display_news(verdadeiras)
+                    print("=" * 60)
+                    input("\nPronto para voltar? (Enter)")
 
                 elif sub_option == 3:
-                    falsas = ManageNews.search_status_news("Falso")
-                    ManageNews.display_news("Falso")
+                    clear_screen()
+                    print("=" * 60)
+                    print("{:^60}".format("NOTÍCIAS_FALSAS\n"))
+                    print("=" * 60)
+                    falsas = manager.search_status_news("Falso")
+                    manager.display_news(falsas)
+                    print("=" * 60)
+                    input("\nPronto para voltar? (Enter)")
+
 
                 elif sub_option == 4:
-                    nao_checadas = ManageNews.search_status_news("Não Checado")
-                    ManageNews.display_news("Não Checado")
+                    clear_screen()
+                    print("=" * 60)
+                    print("{:^60}".format("NOTÍCIAS NÃO CHECADAS\n"))
+                    print("=" * 60)
+                    nao_checadas = manager.search_status_news("Não Checado")
+                    manager.display_news(nao_checadas)
+                    print("=" * 60)
+                    input("\nPronto para voltar? (Enter)")
+
 
                 elif sub_option == 5:
+                    clear_screen()
                     continue
 
             case 3:
-                ManageNews.update_news()
+                manager.update_news()
 
             case 4:
-                print("...")
+                report = ReportNews()
+                report.report_generation()
 
             case 5:
                 print("Encerrando o sistema..")
