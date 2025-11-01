@@ -67,7 +67,7 @@ class ManageNews:
 
         if loaded_news:  # Coloca as existentes no gerenciador
             self.news = loaded_news
-            
+
         while True:
             url = input("URL: ").strip()
             if url:
@@ -138,10 +138,7 @@ class ManageNews:
 
             for id_news, news in loaded_news.items():
                 if news[1] == status:
-                    filter_status[id_news] = {
-                        "url": news[0],
-                        "status": news[1]
-                    }
+                    filter_status[id_news] = news
 
             return filter_status
         
@@ -165,4 +162,4 @@ class ManageNews:
             return 
         
         for id_news, news in noticias.items():
-            print(f"ID: {id_news} | URL: {news["url"]} | Status: {news["status"]}\n")
+            print(f"ID: {id_news} | URL: {news[0]} | Status: {news[1]}\n")
