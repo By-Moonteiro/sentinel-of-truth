@@ -54,9 +54,9 @@ class ManageNews:
         if not noticia:
             print("Você não adicionou uma notícia.")
             return
-        
+
         self.news[next_id] = noticia
-        print(f"Notícia gerada com o ID: {next_id}")   
+        print(f"Notícia gerada com o ID: {next_id}")
 
     def register_news(self) -> None:
         """
@@ -93,12 +93,10 @@ class ManageNews:
         loaded_news = Handler.load_date()
 
         if not loaded_news:
-                print("Não há notícia para ser alterada")
-                return False
+            print("Não há notícia para ser alterada")
+            return False
 
         while True:
-           
-
             id_news = input("Digite o ID da notícia (ou '0' para cancelar): ").strip()
 
             if id_news == "0":
@@ -133,7 +131,7 @@ class ManageNews:
             loaded_news = Handler.load_date()
             if not loaded_news:
                 return {}
-            
+
             filter_status = {}
 
             for id_news, news in loaded_news.items():
@@ -141,11 +139,10 @@ class ManageNews:
                     filter_status[id_news] = news
 
             return filter_status
-        
+
         except Exception as e:
             print(f"Erro ao tentar buscar: {e}")
             return {}
-
 
     def display_news(self, noticias: dict) -> None:
         """
@@ -159,7 +156,7 @@ class ManageNews:
         """
         if not noticias:
             print("Não tem noticias para ser apresentada")
-            return 
-        
+            return
+
         for id_news, news in noticias.items():
             print(f"ID: {id_news} | URL: {news[0]} | Status: {news[1]}\n")

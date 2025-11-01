@@ -9,12 +9,13 @@ REPORT = Path(__file__).parent.parent.parent / "data" / "relatorio.txt"
 # Status
 STATUS = {"1": "Verdadeiro", "2": "Falso", "3": "Não Checado"}
 
+
 # Função para limpar o terminal
 def clear_screen():
     """
-        Limpa o terminal
+    Limpa o terminal
 
-        Returns:
-            SO (comando): Caso seja windows: "cls", caso seja outro: "clear"
+    Returns:
+        SO (comando): Caso seja windows: "cls", caso seja outro: "clear"
     """
     os.system("cls" if os.name == "nt" else "clear")

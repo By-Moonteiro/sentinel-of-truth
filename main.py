@@ -7,8 +7,8 @@ from src.utils.config import clear_screen
 
 def main() -> None:
     """Menu Principal"""
-    
-    manager = ManageNews() # <- instância
+
+    manager = ManageNews()  # <- instância
 
     running = True
     while running:
@@ -75,7 +75,6 @@ def main() -> None:
                     print("=" * 60)
                     input("\nPronto para voltar? (Enter)")
 
-
                 elif sub_option == 4:
                     clear_screen()
                     print("=" * 60)
@@ -85,7 +84,6 @@ def main() -> None:
                     manager.display_news(nao_checadas)
                     print("=" * 60)
                     input("\nPronto para voltar? (Enter)")
-
 
                 elif sub_option == 5:
                     clear_screen()
