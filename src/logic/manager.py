@@ -33,13 +33,13 @@ class ManageNews:
         noticia (dict): Dicionário no formato {id: Notícia}
     """
 
-    def __init__(self) -> dict:
+    def __init__(self) -> None:
         """
         Inicializa um gerenciador de notícias vazio.
         """
         self.news = {}
 
-    def add_news(self, noticia: News) -> dict:
+    def add_news(self, noticia: News) -> None:
         """
         Adiciona uma nova notícia ao gerenciador.
 
@@ -49,30 +49,39 @@ class ManageNews:
         Returns:
             int: ID atribuído á notícia
         """
-
         next_id = id_generation(self.news)
-        self.news[next_id] = noticia
 
-    def register_news() -> None:
+        if not noticia:
+            print("Você não adicionou uma notícia.")
+            return
+        
+        self.news[next_id] = noticia
+        print(f"Notícia gerada com o ID: {next_id}")   
+
+    def register_news(self) -> None:
         """
         Gerencia todo o registro.
         """
 
-        manager = ManageNews()
         loaded_news = Handler.load_date()  # Carrega os arquivos
 
         if loaded_news:  # Coloca as existentes no gerenciador
-            manager.news = loaded_news
+            self.news = loaded_news
+            
+        while True:
+            url = input("URL: ").strip()
+            if url:
+                break
+            print("A URL não pode estar vazia..")
 
-        url = input("URL: ")
         print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
         status = valid_status()
 
         news = News(url, status)
         news_to_list = news.to_list()  # Converte os atributos para lista
-        manager.add_news(news_to_list)  # Adiciona a lista à um dicionario
+        self.add_news(news_to_list)  # Adiciona a lista à um dicionario
 
-        Handler.save_date(manager.news)
+        Handler.save_date(self.news)
 
     def update_news(self) -> bool:
         """
@@ -83,14 +92,20 @@ class ManageNews:
         """
         loaded_news = Handler.load_date()
 
+        if not loaded_news:
+                print("Não há notícia para ser alterada")
+                return False
+
         while True:
-            id_news = input("Digite o ID da notícia (ou '0' para cancelar): ")
+           
+
+            id_news = input("Digite o ID da notícia (ou '0' para cancelar): ").strip()
 
             if id_news == "0":
                 return False
 
             elif id_news in loaded_news:
-                news = loaded_news[id]
+                news = loaded_news[id_news]
 
                 print(f"O Status atual é: {news[1]}")
                 new_status = valid_status()  # <- Pega o novo status
@@ -114,17 +129,25 @@ class ManageNews:
         Returns:
             dict: Dicionário de Noticias com o status especifico
         """
-        loaded_news = Handler.load_date()
-        filter_status = {}
+        try:
+            loaded_news = Handler.load_date()
+            if not loaded_news:
+                return {}
+            
+            filter_status = {}
 
-        for id_news, news in loaded_news.items():
-            if news[1] == status:
-                filter_status[id_news] = {
-                    "url": news[0],
-                    "status": news[1]
-                }
+            for id_news, news in loaded_news.items():
+                if news[1] == status:
+                    filter_status[id_news] = {
+                        "url": news[0],
+                        "status": news[1]
+                    }
 
-        return filter_status
+            return filter_status
+        
+        except Exception as e:
+            print(f"Erro ao tentar buscar: {e}")
+            return {}
 
 
     def display_news(self, noticias: dict) -> None:
@@ -137,5 +160,9 @@ class ManageNews:
         Returns:
             None: Função apenas exibe output na tela
         """
+        if not noticias:
+            print("Não tem noticias para ser apresentada")
+            return 
+        
         for id_news, news in noticias.items():
             print(f"ID: {id_news} | URL: {news["url"]} | Status: {news["status"]}\n")
