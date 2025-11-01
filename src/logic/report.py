@@ -2,8 +2,11 @@ class ReportNews:
     def percent_calculation(self, manager):
         pass
 
-    def report_txt_news(self, manager):
+    def qtd_news_register(self, manager):
         pass
 
-    def report_generation(percentage: float):
+    def qtd_news_status_each(self, manager):
+        pass
+
+    def report_generation(self, percentage: float, qtd: int, each: int):
         pass
