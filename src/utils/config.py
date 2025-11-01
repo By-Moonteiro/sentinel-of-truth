@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Caminhos para os arquivos
