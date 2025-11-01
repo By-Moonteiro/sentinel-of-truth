@@ -27,10 +27,12 @@ def id_generation(news: dict) -> int:
 
 class ManageNews:
     """
-    Gerencia as notícias.
+    Gerencia o ciclo completo das notícias.
+
+    Responsável por cadastrar, buscar, atualizar e exibir noticias
 
     Attributes:
-        noticia (dict): Dicionário no formato {id: Notícia}
+        news (dict): Dicionário no formato {id: [url, status]}
     """
 
     def __init__(self) -> None:
@@ -47,7 +49,7 @@ class ManageNews:
             noticia: Objeto News contendo a url e status
 
         Returns:
-            int: ID atribuído á notícia
+            None: Cria o dicionário com o ID atribuído á notícia
         """
         next_id = id_generation(self.news)
 
@@ -60,7 +62,7 @@ class ManageNews:
 
     def register_news(self) -> None:
         """
-        Gerencia todo o registro.
+        Gerencia todo o processo de registro e salva as notícias no Json.: 
         """
 
         loaded_news = Handler.load_date()  # Carrega os arquivos

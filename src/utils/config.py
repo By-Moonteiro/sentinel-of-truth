@@ -11,11 +11,11 @@ STATUS = {"1": "Verdadeiro", "2": "Falso", "3": "Não Checado"}
 
 
 # Função para limpar o terminal
-def clear_screen():
+def clear_screen() -> None:
     """
     Limpa o terminal
 
     Returns:
-        SO (comando): Caso seja windows: "cls", caso seja outro: "clear"
+        None: Caso seja windows usa o comando: "cls", caso seja outro: "clear"
     """
     os.system("cls" if os.name == "nt" else "clear")

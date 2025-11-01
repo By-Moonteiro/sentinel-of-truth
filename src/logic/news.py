@@ -1,6 +1,6 @@
 class News:
     """
-    Representa uma notícia.
+    Representa o objeto da notícia.
 
     Attributes:
         url (str): Link para a notícia.

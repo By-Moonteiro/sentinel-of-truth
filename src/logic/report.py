@@ -4,10 +4,27 @@ from src.utils.config import REPORT
 
 
 class ReportNews:
-    def __init__(self):
+    """
+    Obtêm todos os dados do relatório.  
+    
+    Responsável por achar o total de noticias, a quantidade por status + a porcentagem dos status, e exibir tudo
+
+    Attributes:
+        dict: Dicionario com as noticias carregadas
+    """
+    def __init__(self) -> dict:
+        """
+        Carrega todas as notícias salvas.   
+        """
         self.loaded_news = Handler.load_date()
 
-    def percent_calculation(self):
+    def percent_calculation(self) -> float:
+        """
+        Calcula a porcentagem de cada status.
+
+        Returns:
+            float: Porcentagem das notícias com status verdadeiro/falso/não verificado individualmente.    
+        """
         try:
             true, false, unverified = self.qtd_news_status_each()
             total = self.qtd_news_register()
@@ -26,7 +43,13 @@ class ReportNews:
 
             return 0.0, 0.0, 0.0
 
-    def qtd_news_register(self):
+    def qtd_news_register(self) -> int:
+        """
+        Obtêm o total de notícias cadastradas.
+
+        Returns:
+            total_news(int): Total de notícias.    
+        """
         try:
             # Total de notícias gerais
             total_news = len(self.loaded_news)
@@ -38,7 +61,13 @@ class ReportNews:
 
             return 0
 
-    def qtd_news_status_each(self):
+    def qtd_news_status_each(self) -> int:
+        """
+        Obtêm o total de notícias por status.
+
+        Returns:
+            int: Total de notícias verdadeiras, falsas e não checadas.    
+        """
         try:
             # Total de notícias por status
             true_news = len(ManageNews.search_status_news("Verdadeiro"))
@@ -52,7 +81,11 @@ class ReportNews:
 
             return 0, 0, 0  # <- Retorna valor seguro
 
-    def report_generation(self):
+    def report_generation(self) -> None:
+        """
+        Gera o relatório com todos os dados formatados em uma tabela.   
+        """
+
         percent_true, percent_false, percent_unverified = self.percent_calculation()
         true, false, unverified = self.qtd_news_status_each()
         total = self.qtd_news_register()
