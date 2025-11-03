@@ -23,6 +23,9 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 - `Módulos e Pacotes`
 - `Persistência de dados`
 - `Estrutura de projeto modular`
+- `Pre-commit`
+- `Pylint`
+- `Ruff`
 
 ## 🏗️ Estrutura do Projeto
 
@@ -32,6 +35,8 @@ sentinel-of-truth/
 ├── main.py                 # Ponto de entrada do programa
 ├── requirements.txt        # Dependências do projeto (vazio)
 ├── README.md
+├── .pre-commit-config.yaml
+├── .pylintrc
 ├── .gitignore
 │
 ├── data/                      # Dados salvos
@@ -64,6 +69,12 @@ git clone <https://github.com/By-Moonteiro/sentinel-of-truth.git>
 
 # 2️⃣ Entre na pasta do projeto
 cd sentinel-of-truth
+
+# 3️⃣ Instale as dependências
+pip install -r requirements.txt
+
+# 4️⃣ Configure o pre-commit
+pre-commit install
 
 # 4️⃣ Execute o projeto
 python main.py
