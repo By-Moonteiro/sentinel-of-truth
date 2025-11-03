@@ -1,6 +1,6 @@
-from .news import News
 from src.utils.json_handler import Handler
 from src.utils.validation import valid_status
+from .news import News
 
 
 def id_generation(news: dict) -> int:
@@ -23,6 +23,9 @@ def id_generation(news: dict) -> int:
             max_id = int_key
 
     return max_id + 1  # Retorna o maior id + 1
+
+
+handler = Handler()  # <- Instância
 
 
 class ManageNews:
@@ -62,10 +65,9 @@ class ManageNews:
 
     def register_news(self) -> None:
         """
-        Gerencia todo o processo de registro e salva as notícias no Json.: 
+        Gerencia todo o processo de registro e salva as notícias no Json.:
         """
-
-        loaded_news = Handler.load_date()  # Carrega os arquivos
+        loaded_news = handler.load_date()  # Carrega os arquivos
 
         if loaded_news:  # Coloca as existentes no gerenciador
             self.news = loaded_news
@@ -83,7 +85,7 @@ class ManageNews:
         news_to_list = news.to_list()  # Converte os atributos para lista
         self.add_news(news_to_list)  # Adiciona a lista à um dicionario
 
-        Handler.save_date(self.news)
+        handler.save_date(self.news)
 
     def update_news(self) -> bool:
         """
@@ -92,7 +94,7 @@ class ManageNews:
         Returns:
             bool: True se atualizou, False se não atualizou
         """
-        loaded_news = Handler.load_date()
+        loaded_news = handler.load_date()
 
         if not loaded_news:
             print("Não há notícia para ser alterada")
@@ -104,7 +106,7 @@ class ManageNews:
             if id_news == "0":
                 return False
 
-            elif id_news in loaded_news:
+            if id_news in loaded_news:
                 news = loaded_news[id_news]
 
                 print(f"O Status atual é: {news[1]}")
@@ -112,7 +114,7 @@ class ManageNews:
                 news[1] = new_status
                 print("Status Atualizado Com Sucesso!")
 
-                Handler.save_date(loaded_news)
+                handler.save_date(loaded_news)
 
                 return True
 
@@ -130,7 +132,7 @@ class ManageNews:
             dict: Dicionário de Noticias com o status especifico
         """
         try:
-            loaded_news = Handler.load_date()
+            loaded_news = handler.load_date()
             if not loaded_news:
                 return {}
 

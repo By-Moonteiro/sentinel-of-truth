@@ -20,3 +20,6 @@ venv/
 # Ruff
 .ruff_cache/
 .ruff
+
+# Pre-Commit
+.pre-commit-config.yaml~

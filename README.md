@@ -35,7 +35,7 @@ sentinel-of-truth/
 ├── .gitignore
 │
 ├── data/                      # Dados salvos
-│   ├── relatorio.txt          # <- relatório gerado      
+│   ├── relatorio.txt          # <- relatório gerado
 │   └── salved_news.json       # <- Notícias salvas
 │
 ├── src/

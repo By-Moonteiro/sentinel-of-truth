@@ -50,7 +50,8 @@ def main() -> None:
                     print("=" * 60)
                     print("{:^60}".format("TODAS AS NOTÍCIAS\n"))
                     print("=" * 60)
-                    noticias = Handler.load_date()
+                    handler = Handler()  # <- Instância
+                    noticias = handler.load_date()
                     manager.display_news(noticias)
                     print("=" * 60)
                     input("\nPronto para voltar? (Enter)")
@@ -93,7 +94,7 @@ def main() -> None:
                 manager.update_news()
 
             case 4:
-                report = ReportNews()
+                report = ReportNews()  # <- Instância
                 report.report_generation()
 
             case 5:

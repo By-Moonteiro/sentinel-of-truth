@@ -1,29 +1,33 @@
 from src.utils.json_handler import Handler
-from .manager import ManageNews
 from src.utils.config import REPORT
+from .manager import ManageNews
+
+handler = Handler()
+manager = ManageNews()
 
 
 class ReportNews:
     """
-    Obtêm todos os dados do relatório.  
-    
+    Obtêm todos os dados do relatório.
+
     Responsável por achar o total de noticias, a quantidade por status + a porcentagem dos status, e exibir tudo
 
     Attributes:
         dict: Dicionario com as noticias carregadas
     """
+
     def __init__(self) -> dict:
         """
-        Carrega todas as notícias salvas.   
+        Carrega todas as notícias salvas.
         """
-        self.loaded_news = Handler.load_date()
+        self.loaded_news = handler.load_date()
 
     def percent_calculation(self) -> float:
         """
         Calcula a porcentagem de cada status.
 
         Returns:
-            float: Porcentagem das notícias com status verdadeiro/falso/não verificado individualmente.    
+            float: Porcentagem das notícias com status verdadeiro/falso/não verificado individualmente.
         """
         try:
             true, false, unverified = self.qtd_news_status_each()
@@ -48,7 +52,7 @@ class ReportNews:
         Obtêm o total de notícias cadastradas.
 
         Returns:
-            total_news(int): Total de notícias.    
+            total_news(int): Total de notícias.
         """
         try:
             # Total de notícias gerais
@@ -66,13 +70,13 @@ class ReportNews:
         Obtêm o total de notícias por status.
 
         Returns:
-            int: Total de notícias verdadeiras, falsas e não checadas.    
+            int: Total de notícias verdadeiras, falsas e não checadas.
         """
         try:
             # Total de notícias por status
-            true_news = len(ManageNews.search_status_news("Verdadeiro"))
-            false_news = len(ManageNews.search_status_news("Falso"))
-            unverified_news = len(ManageNews.search_status_news("Não Checado"))
+            true_news = len(manager.search_status_news("Verdadeiro"))
+            false_news = len(manager.search_status_news("Falso"))
+            unverified_news = len(manager.search_status_news("Não Checado"))
 
             return true_news, false_news, unverified_news
 
@@ -83,7 +87,7 @@ class ReportNews:
 
     def report_generation(self) -> None:
         """
-        Gera o relatório com todos os dados formatados em uma tabela.   
+        Gera o relatório com todos os dados formatados em uma tabela.
         """
 
         percent_true, percent_false, percent_unverified = self.percent_calculation()

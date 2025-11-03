@@ -14,8 +14,8 @@ def menu_validation(opc: str, start: int, end: int) -> int:
         option(int): Opção válida convertida para inteiro.
 
     Examples:
-        >>> menu_validation("1", 1, 5) 
-        True  
+        >>> menu_validation("1", 1, 5)
+        True
         >>> menu_validation("6", 1, 5)
         False
 

@@ -4,7 +4,9 @@ from .config import DATA, DATA_BACKUP
 
 
 class Handler:
-    def save_date(noticias: dict) -> None:
+    """Gerencia o json"""
+
+    def save_date(self, noticias: dict) -> None:
         """
         Salva notícias em arquivo JSON
 
@@ -34,7 +36,7 @@ class Handler:
         except Exception as e:
             print(f"Erro inesperado: {e}")
 
-    def load_date() -> dict:
+    def load_date(self) -> dict:
         """
         Transforma o arquivo JSON para dicionario
 

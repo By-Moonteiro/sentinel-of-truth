@@ -3,10 +3,9 @@ extension-pkg-allow-list=
 
 [MESSAGES CONTROL]
 disable=
-    C0103,
-    C0301,
-    R0903,
-    R0801,
+    C0301, # Line too long
+    R0903, # Too few public methods
+    R0801, # Duplicate code
     C0114  # missing-module-docstring
 enable=
     C0116  # missing-function-docstring
