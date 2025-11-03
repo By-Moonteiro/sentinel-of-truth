@@ -110,6 +110,7 @@ class ManageNews:
                 news = loaded_news[id_news]
 
                 print(f"O Status atual é: {news[1]}")
+                print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
                 new_status = valid_status()  # <- Pega o novo status
                 news[1] = new_status
                 print("Status Atualizado Com Sucesso!")
