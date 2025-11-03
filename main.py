@@ -1,28 +1,22 @@
 from src.logic.manager import ManageNews
+from src.logic.report import ReportNews
 from src.utils.json_handler import Handler
 from src.utils.validation import menu_validation
-from src.logic.report import ReportNews
 from src.utils.config import clear_screen
+from src.utils.display import display_all_news, display_news_by_status, wait_for_enter
+from src.utils.menu import display_main_menu, display_sub_menu
 
 
 def main() -> None:
-    """Menu Principal"""
+    """Coordena todo o programa"""
 
     manager = ManageNews()  # <- instância
-
     running = True
-    while running:
-        print("\n╔══════════════════════════════╗")
-        print("║      SENTINEL OF TRUTH       ║")
-        print("╠══════════════════════════════╣")
-        print("║ 1 - Cadastrar uma notícia    ║")
-        print("║ 2 - Consultar notícias       ║")
-        print("║ 3 - Atualizar uma notícia    ║")
-        print("║ 4 - Gerar um relatório       ║")
-        print("║ 5 - Encerar o programa       ║")
-        print("╚══════════════════════════════╝")
-        option = input("➤ Escolha uma opção: ")
 
+    while running:
+        display_main_menu() # <- Exibe o Menu principal
+
+        option = input("➤ Escolha uma opção: ")
         option = menu_validation(option, 1, 5)
 
         match option:
@@ -31,60 +25,26 @@ def main() -> None:
 
             case 2:
                 clear_screen()
-
-                print("\n╔═════════════════════════════════╗")
-                print("║            CHECK NEWS           ║")
-                print("╠═════════════════════════════════╣")
-                print("║ 1 - Ver todas as notícias       ║")
-                print("║ 2 - Ver notícias VERDADEIRAS    ║")
-                print("║ 3 - Ver notícias FALSAS         ║")
-                print("║ 4 - Ver notícias NÃO CHECADAS   ║")
-                print("║ 5 - Retornar                    ║")
-                print("╚═════════════════════════════════╝")
+                display_sub_menu() # <- Exibe o Sub-menu
 
                 sub_option = input("➤ Escolha uma opção: ")
                 sub_option = menu_validation(sub_option, 1, 5)
 
                 if sub_option == 1:
-                    clear_screen()
-                    print("=" * 60)
-                    print("{:^60}".format("TODAS AS NOTÍCIAS\n"))
-                    print("=" * 60)
-                    handler = Handler()  # <- Instância
-                    noticias = handler.load_date()
-                    manager.display_news(noticias)
-                    print("=" * 60)
-                    input("\nPronto para voltar? (Enter)")
+                    display_all_news(manager)
+                    wait_for_enter
 
-                elif sub_option == 2:
-                    clear_screen()
-                    print("=" * 60)
-                    print("{:^60}".format("NOTÍCIAS_VERDADEIRAS\n"))
-                    print("=" * 60)
-                    verdadeiras = manager.search_status_news("Verdadeiro")
-                    manager.display_news(verdadeiras)
-                    print("=" * 60)
-                    input("\nPronto para voltar? (Enter)")
+                elif sub_option == 2:                    
+                    display_news_by_status(manager, "NOTÍCIAS VERDADEIRAS", "Verdadeiro")
+                    wait_for_enter()
 
                 elif sub_option == 3:
-                    clear_screen()
-                    print("=" * 60)
-                    print("{:^60}".format("NOTÍCIAS_FALSAS\n"))
-                    print("=" * 60)
-                    falsas = manager.search_status_news("Falso")
-                    manager.display_news(falsas)
-                    print("=" * 60)
-                    input("\nPronto para voltar? (Enter)")
+                    display_news_by_status(manager, "NOTÍCIAS FALSAS", "Falso")
+                    wait_for_enter()
 
                 elif sub_option == 4:
-                    clear_screen()
-                    print("=" * 60)
-                    print("{:^60}".format("NOTÍCIAS NÃO CHECADAS\n"))
-                    print("=" * 60)
-                    nao_checadas = manager.search_status_news("Não Checado")
-                    manager.display_news(nao_checadas)
-                    print("=" * 60)
-                    input("\nPronto para voltar? (Enter)")
+                    display_news_by_status(manager, "NOTÍCIAS NÃO CHECADAS", "não_checado")
+                    wait_for_enter()
 
                 elif sub_option == 5:
                     clear_screen()
