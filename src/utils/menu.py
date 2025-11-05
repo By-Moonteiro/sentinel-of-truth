@@ -10,6 +10,7 @@ def display_main_menu() -> None:
     print("║ 5 - Encerar o programa       ║")
     print("╚══════════════════════════════╝")
 
+
 def display_sub_menu() -> None:
     """Exibe o sub-menu"""
     print("\n╔═════════════════════════════════╗")

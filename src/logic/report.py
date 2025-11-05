@@ -75,15 +75,9 @@ class ReportNews:
         try:
             # Pega o total de notícias por status
 
-            true_news = len(
-                manager.search_status_news("Verdadeiro")
-                )
-            false_news = len(
-                manager.search_status_news("Falso")
-                )
-            unverified_news = len(
-                manager.search_status_news("Não Checado")
-                )
+            true_news = len(manager.search_status_news("Verdadeiro"))
+            false_news = len(manager.search_status_news("Falso"))
+            unverified_news = len(manager.search_status_news("Não Checado"))
 
             return true_news, false_news, unverified_news
 
@@ -97,19 +91,23 @@ class ReportNews:
         Gera o relatório com todos os dados formatados em uma tabela.
         """
 
-        ( # Pega o percentual de cada status
-         percent_true, 
-         percent_false, 
-         percent_unverified
-         ) = self.percent_calculation() 
-        
-        ( # Pega o total de notícia de cada status
-         true, false, unverified
-         ) = self.qtd_news_status_each() 
-        
-        total = self.qtd_news_register() # <- Pega o total de notícias gerais
+        (  # Pega o percentual de cada status
+            percent_true,
+            percent_false,
+            percent_unverified,
+        ) = self.percent_calculation()
 
-        with open(REPORT, "w", encoding="utf-8") as report: # <- Cria/Escreve o relatório
+        (  # Pega o total de notícia de cada status
+            true,
+            false,
+            unverified,
+        ) = self.qtd_news_status_each()
+
+        total = self.qtd_news_register()  # <- Pega o total de notícias gerais
+
+        with open(
+            REPORT, "w", encoding="utf-8"
+        ) as report:  # <- Cria/Escreve o relatório
             report.write(
                 "╔═════════════════════════════════════════════════════════════════════╗\n"
             )

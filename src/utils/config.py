@@ -3,26 +3,23 @@ from pathlib import Path
 
 # Caminhos para os arquivos
 
-DATA = (   # <- Caminho pra Salvar as Notícias
+DATA = (  # <- Caminho pra Salvar as Notícias
     Path(__file__).parent.parent.parent / "data" / "saved_news.json"
 )
-DATA_BACKUP = (   # <- Caminho pro Backup
+DATA_BACKUP = (  # <- Caminho pro Backup
     Path(__file__).parent.parent.parent / "data" / "saved_news_backup.json"
 )
-REPORT = (   # <- Caminho pro Relatório
+REPORT = (  # <- Caminho pro Relatório
     Path(__file__).parent.parent.parent / "data" / "relatorio.txt"
-)  
+)
 
 # Status
 
-STATUS = {
-    "1": "Verdadeiro", 
-    "2": "Falso", 
-    "3": "Não Checado"
-    }
+STATUS = {"1": "Verdadeiro", "2": "Falso", "3": "Não Checado"}
 
 
 # Função para limpar o terminal
+
 
 def clear_screen() -> None:
     """

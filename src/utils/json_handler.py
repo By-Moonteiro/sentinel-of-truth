@@ -17,10 +17,8 @@ class Handler:
             None: Salva com sucesso
         """
 
-        try: # Tenta escrever a notícia
-            with open(
-                DATA, "w", encoding="utf-8"
-            ) as arquivo: 
+        try:  # Tenta escrever a notícia
+            with open(DATA, "w", encoding="utf-8") as arquivo:
                 json.dump(noticias, arquivo, ensure_ascii=False, indent=2)
             print("Salvo com sucesso!")
 

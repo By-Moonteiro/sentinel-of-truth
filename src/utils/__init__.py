@@ -13,5 +13,5 @@ __all__ = [
     "STATUS",
     "REPORT",
     "display_main_menu",
-    "display_sub_menu"
+    "display_sub_menu",
 ]

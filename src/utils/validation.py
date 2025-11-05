@@ -24,10 +24,10 @@ def menu_validation(opc: str, start: int, end: int) -> int:
     valid = False
     while not valid:
         try:
-            option = int(opc) # <- Converte a opção para int para verificar
+            option = int(opc)  # <- Converte a opção para int para verificar
 
             # Verifica no range se é uma opção válida
-            if start <= option <= end: 
+            if start <= option <= end:
                 valid = True
                 return option  # <- Retorna a opção válida
 
@@ -60,6 +60,6 @@ def valid_status() -> str:
         status = input("STATUS: ").strip()
 
         if status in ["1", "2", "3"]:
-            return STATUS.get(status) # <- Status correspondente
+            return STATUS.get(status)  # <- Status correspondente
 
         print("Opção invalida! Digite 1, 2 ou 3\n")
