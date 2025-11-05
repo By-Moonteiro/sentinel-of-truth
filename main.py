@@ -3,7 +3,6 @@ from src.logic.manager import ManageNews
 from src.logic.report import ReportNews
 
 # --- Utilitários gerais ---
-from src.utils.json_handler import Handler
 from src.utils.validation import menu_validation
 from src.utils.config import clear_screen
 
