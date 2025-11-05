@@ -118,7 +118,7 @@ class ReportNews:
                 "╠═════════════════════════════════════════════════════════════════════╣\n"
             )
             report.write(
-                f"║ Total de Notícias Cadastradas: {total}                             ║\n"
+                f"║ Total de Notícias Cadastradas: {total}                                    ║\n"
             )
             report.write(
                 "║                                                                     ║\n"
@@ -130,13 +130,13 @@ class ReportNews:
                 "║                                                                     ║\n"
             )
             report.write(
-                f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)             ║\n"
+                f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)                                  ║\n"
             )
             report.write(
-                f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                ║\n"
+                f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                                       ║\n"
             )
             report.write(
-                f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)║\n"
+                f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)                                 ║\n"
             )
             report.write(
                 "╚═════════════════════════════════════════════════════════════════════╝\n"
