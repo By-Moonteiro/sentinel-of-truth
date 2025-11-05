@@ -49,6 +49,8 @@ sentinel-of-truth/
 │       ├── __init__.py
 │       ├── config.py
 │       ├── validation.py
+│       ├── menu.py
+│       ├── display.py
 │       └── json_handler.py
 │
 └── tests/                  # Testes automatizados
