@@ -73,10 +73,17 @@ class ReportNews:
             int: Total de notícias verdadeiras, falsas e não checadas.
         """
         try:
-            # Total de notícias por status
-            true_news = len(manager.search_status_news("Verdadeiro"))
-            false_news = len(manager.search_status_news("Falso"))
-            unverified_news = len(manager.search_status_news("Não Checado"))
+            # Pega o total de notícias por status
+
+            true_news = len(
+                manager.search_status_news("Verdadeiro")
+                )
+            false_news = len(
+                manager.search_status_news("Falso")
+                )
+            unverified_news = len(
+                manager.search_status_news("Não Checado")
+                )
 
             return true_news, false_news, unverified_news
 
@@ -90,41 +97,49 @@ class ReportNews:
         Gera o relatório com todos os dados formatados em uma tabela.
         """
 
-        percent_true, percent_false, percent_unverified = self.percent_calculation()
-        true, false, unverified = self.qtd_news_status_each()
-        total = self.qtd_news_register()
+        ( # Pega o percentual de cada status
+         percent_true, 
+         percent_false, 
+         percent_unverified
+         ) = self.percent_calculation() 
+        
+        ( # Pega o total de notícia de cada status
+         true, false, unverified
+         ) = self.qtd_news_status_each() 
+        
+        total = self.qtd_news_register() # <- Pega o total de notícias gerais
 
-        with open(REPORT, "w", encoding="utf-8") as report:
+        with open(REPORT, "w", encoding="utf-8") as report: # <- Cria/Escreve o relatório
             report.write(
-                "╔══════════════════════════════════════════════════════════════╗\n"
+                "╔═════════════════════════════════════════════════════════════════════╗\n"
             )
             report.write(
-                "║                           RELATÓRIO                          ║\n"
+                "║                              RELATÓRIO                              ║\n"
             )
             report.write(
-                "╠══════════════════════════════════════════════════════════════╣\n"
+                "╠═════════════════════════════════════════════════════════════════════╣\n"
             )
             report.write(
                 f"║ Total de Notícias Cadastradas: {total}                             ║\n"
             )
             report.write(
-                "║                                                              ║\n"
+                "║                                                                     ║\n"
             )
             report.write(
-                "║ Distribuição por Status:                                     ║\n"
+                "║ Distribuição por Status:                                            ║\n"
             )
             report.write(
-                "║                                                              ║\n"
+                "║                                                                     ║\n"
             )
             report.write(
-                f"║  -> Verdadeiras: {true} ({percent_true:.1f}%)                                    ║\n"
+                f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)             ║\n"
             )
             report.write(
-                f"║  -> Falsas: {false} ({percent_false:.1f}%)                                         ║\n"
+                f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                ║\n"
             )
             report.write(
-                f"║  -> Não Checadas: {unverified} ({percent_unverified:.1f}%)                                   ║\n"
+                f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)║\n"
             )
             report.write(
-                "╚══════════════════════════════════════════════════════════════╝\n"
+                "╚═════════════════════════════════════════════════════════════════════╝\n"
             )

@@ -1,10 +1,22 @@
+# --- Lógica principal ---
 from src.logic.manager import ManageNews
 from src.logic.report import ReportNews
+
+# --- Utilitários gerais ---
 from src.utils.json_handler import Handler
 from src.utils.validation import menu_validation
 from src.utils.config import clear_screen
-from src.utils.display import display_all_news, display_news_by_status, wait_for_enter
-from src.utils.menu import display_main_menu, display_sub_menu
+
+# --- Interface e exibição ---
+from src.utils.display import (
+    display_all_news, 
+    display_news_by_status, 
+    wait_for_enter
+)
+from src.utils.menu import (
+    display_main_menu, 
+    display_sub_menu
+)
 
 
 def main() -> None:
@@ -17,11 +29,10 @@ def main() -> None:
         display_main_menu() # <- Exibe o Menu principal
 
         option = input("➤ Escolha uma opção: ")
-        option = menu_validation(option, 1, 5)
-
+        option = menu_validation(option, 1, 5) # <- Valida somente as opções entre 1 e 5
         match option:
             case 1:
-                manager.register_news()
+                manager.register_news() # <- Gerencia todo o registro das notícias
 
             case 2:
                 clear_screen()
@@ -30,32 +41,38 @@ def main() -> None:
                 sub_option = input("➤ Escolha uma opção: ")
                 sub_option = menu_validation(sub_option, 1, 5)
 
-                if sub_option == 1:
+                if sub_option == 1: # <- Exibe todas as notícias 
                     display_all_news(manager)
-                    wait_for_enter
+                    wait_for_enter() # <- Aguarda o usuário pressionar Enter p/ continuar
 
-                elif sub_option == 2:                    
-                    display_news_by_status(manager, "NOTÍCIAS VERDADEIRAS", "Verdadeiro")
+                elif sub_option == 2:                  
+                    display_news_by_status(
+                        manager, "NOTÍCIAS VERDADEIRAS", "Verdadeiro"
+                        )
                     wait_for_enter()
 
-                elif sub_option == 3:
-                    display_news_by_status(manager, "NOTÍCIAS FALSAS", "Falso")
+                elif sub_option == 3: # <- Exibe somente as notícias Falsas
+                    display_news_by_status(
+                        manager, "NOTÍCIAS FALSAS", "Falso"
+                        )
                     wait_for_enter()
 
                 elif sub_option == 4:
-                    display_news_by_status(manager, "NOTÍCIAS NÃO CHECADAS", "não_checado")
+                    display_news_by_status(
+                        manager, "NOTÍCIAS NÃO CHECADAS", "não_checado"
+                        )
                     wait_for_enter()
 
-                elif sub_option == 5:
+                elif sub_option == 5:  # <- Retorna pro Menu Principal  
                     clear_screen()
                     continue
 
             case 3:
-                manager.update_news()
+                manager.update_news()  # <- Atualiza o status da notícia
 
             case 4:
                 report = ReportNews()  # <- Instância
-                report.report_generation()
+                report.report_generation() # Gera o relatório
 
             case 5:
                 print("Encerrando o sistema..")

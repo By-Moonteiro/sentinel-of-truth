@@ -54,28 +54,32 @@ class ManageNews:
         Returns:
             None: Cria o dicionário com o ID atribuído á notícia
         """
-        next_id = id_generation(self.news)
+        next_id = id_generation(self.news)  # <- Gera um ID
 
         if not noticia:
             print("Você não adicionou uma notícia.")
             return
 
-        self.news[next_id] = noticia
+        self.news[next_id] = noticia  # <- Adiciona a notícia ao dicionário geral
+
         print(f"Notícia gerada com o ID: {next_id}")
 
     def register_news(self) -> None:
         """
         Gerencia todo o processo de registro e salva as notícias no Json.:
         """
-        loaded_news = handler.load_date()  # Carrega os arquivos
+        loaded_news = handler.load_date() # <- Carrega os arquivos
 
-        if loaded_news:  # Coloca as existentes no gerenciador
+        if loaded_news: # <- Coloca as existentes no gerenciador
             self.news = loaded_news
 
         while True:
             url = input("URL: ").strip()
+
+            # Se o usuário digitou algo, sai do loop
             if url:
                 break
+
             print("A URL não pode estar vazia..")
 
         print("Status: [ 1 ] Verdadeiro | [ 2 ] Falso | [ 3 ] Não Checado")
@@ -103,10 +107,10 @@ class ManageNews:
         while True:
             id_news = input("Digite o ID da notícia (ou '0' para cancelar): ").strip()
 
-            if id_news == "0":
+            if id_news == "0": # <- Cancela o looping
                 return False
 
-            if id_news in loaded_news:
+            if id_news in loaded_news: # <- Verifica o id é de uma notícia
                 news = loaded_news[id_news]
 
                 print(f"O Status atual é: {news[1]}")
@@ -115,7 +119,7 @@ class ManageNews:
                 news[1] = new_status
                 print("Status Atualizado Com Sucesso!")
 
-                handler.save_date(loaded_news)
+                handler.save_date(loaded_news) # <- salva no JSON
 
                 return True
 
@@ -134,13 +138,14 @@ class ManageNews:
         """
         try:
             loaded_news = handler.load_date()
-            if not loaded_news:
-                return {}
+
+            if not loaded_news: # <- Caso não tenha notícias
+                return {} # <- Retorna um dicionário vazio
 
             filter_status = {}
 
             for id_news, news in loaded_news.items():
-                if news[1] == status:
+                if news[1] == status:# <- filtra por status (news[1] = atributo: status)
                     filter_status[id_news] = news
 
             return filter_status
@@ -159,7 +164,8 @@ class ManageNews:
         Returns:
             None: Função apenas exibe output na tela
         """
-        if not noticias:
+
+        if not noticias: # <- Caso não tenha notícias
             print("Não tem noticias para ser apresentada")
             return
 

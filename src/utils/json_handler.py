@@ -16,14 +16,15 @@ class Handler:
         Returns:
             None: Salva com sucesso
         """
-        try:
+
+        try: # Tenta escrever a notícia
             with open(
                 DATA, "w", encoding="utf-8"
-            ) as arquivo:  # Tenta escrever a notícia
+            ) as arquivo: 
                 json.dump(noticias, arquivo, ensure_ascii=False, indent=2)
             print("Salvo com sucesso!")
 
-        # Caso nao consiga ele cria um arquivo para salvar as notícias novas
+        # Caso não consiga ele cria um backup para salvar as notícias novas
         except (
             PermissionError,
             FileNotFoundError,
@@ -50,10 +51,10 @@ class Handler:
             with open(DATA, "r", encoding="utf-8") as dados:
                 return json.load(dados)
 
-        # Caso o arquivo não exista/esteja corrompido
+        # Caso o arquivo não exista / esteja corrompido
         except (
             FileNotFoundError,
             json.JSONDecodeError,
         ):
             print("Arquivo vazio...")
-            return {}  # <- Cria um dicionario vazio
+            return {}  # <- retorna um dicionario vazio
