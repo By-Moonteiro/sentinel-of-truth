@@ -10,12 +10,3 @@ class News:
     def __init__(self, url: str, status: str):
         self.url = url
         self.status = status
-
-    def to_list(self) -> list:
-        """
-        Converte os atributos para lista
-
-        Returns:
-            list: lista com os atributos
-        """
-        return [self.url, self.status]
