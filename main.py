@@ -7,8 +7,8 @@ from src.utils.validation import menu_validation
 from src.utils.config import clear_screen
 
 # --- Interface e exibição ---
-from src.utils.display import display_all_news, display_news_by_status, wait_for_enter
-from src.utils.menu import display_main_menu, display_sub_menu
+from src.ui.display import display_all_news, display_news_by_status, wait_for_enter
+from src.ui.menu import display_main_menu, display_sub_menu
 
 
 def main() -> None:
