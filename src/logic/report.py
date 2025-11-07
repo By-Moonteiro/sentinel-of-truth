@@ -1,8 +1,6 @@
-from src.utils.json_handler import Handler
 from src.utils.config import REPORT
 from .manager import ManageNews
 
-handler = Handler()
 manager = ManageNews()
 
 
@@ -16,11 +14,11 @@ class ReportNews:
         dict: Dicionario com as noticias carregadas
     """
 
-    def __init__(self) -> dict:
+    def connection(self) -> dict:
         """
-        Carrega todas as notícias salvas.
+        Carrega a conexão do SQLite.
         """
-        self.loaded_news = handler.load_date()
+        return ManageNews._conectar()
 
     def percent_calculation(self) -> float:
         """
@@ -29,23 +27,21 @@ class ReportNews:
         Returns:
             float: Porcentagem das notícias com status verdadeiro/falso/não verificado individualmente.
         """
-        try:
-            true, false, unverified = self.qtd_news_status_each()
-            total = self.qtd_news_register()
+        total = self.qtd_news_register()
+        true_news = self.qtd_news_status_each("Verdadeiro")
+        false_news = self.qtd_news_status_each("Falso")
+        unverified_news = self.qtd_news_status_each("Não Checado")
 
-            if total == 0:  # Verifica divisões por 0
-                return 0, 0, 0
+        if total > 0: # <- Evita divisão por 0
+            
+            percent_true = (true_news / total) * 100
+            percent_false = (false_news / total) * 100
+            percent_unverified = (unverified_news / total) * 100
 
-            percent_true = (true / total) * 100
-            percent_false = (false / total) * 100
-            percent_unverified = (unverified / total) * 100
-
-            return percent_true, percent_false, percent_unverified
-
-        except Exception as e:
-            print(f"Erro no calculo de porcentagem: {e}")
-
+        else:
             return 0.0, 0.0, 0.0
+            
+        return percent_true, percent_false, percent_unverified
 
     def qtd_news_register(self) -> int:
         """
@@ -54,56 +50,49 @@ class ReportNews:
         Returns:
             total_news(int): Total de notícias.
         """
-        try:
-            # Total de notícias gerais
-            total_news = len(self.loaded_news)
+        with self.connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM noticias")
+            
+            return cursor.fetchone()[0]
 
-            return total_news
 
-        except Exception as e:
-            print(f"Erro ao carregar o total de noticias: {e}")
-
-            return 0
-
-    def qtd_news_status_each(self) -> int:
+    def qtd_news_status_each(self, status: str) -> int:
         """
         Obtêm o total de notícias por status.
 
         Returns:
             int: Total de notícias verdadeiras, falsas e não checadas.
         """
-        try:
-            # Pega o total de notícias por status
+        with self.connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT COUNT(*) FROM noticias WHERE status = ?",
+                (status,)
+            )
+            return cursor.fetchone()[0]
+        
 
-            true_news = len(manager.search_status_news("Verdadeiro"))
-            false_news = len(manager.search_status_news("Falso"))
-            unverified_news = len(manager.search_status_news("Não Checado"))
-
-            return true_news, false_news, unverified_news
-
-        except Exception as e:  # <- Verifica o erro
-            print(f"Erro ao contar notícias: {e}")
-
-            return 0, 0, 0  # <- Retorna valor seguro
 
     def report_generation(self) -> None:
         """
         Gera o relatório com todos os dados formatados em uma tabela.
         """
 
-        (  # Pega o percentual de cada status
-            percent_true,
-            percent_false,
-            percent_unverified,
-        ) = self.percent_calculation()
+        # Pega o percentual de cada status
+        (percent_true, 
+         percent_false, 
+         percent_unverified
+         ) = self.percent_calculation()   
 
-        (  # Pega o total de notícia de cada status
-            true,
-            false,
-            unverified,
-        ) = self.qtd_news_status_each()
+        # Pega o total de notícia de cada status
+        true = self.qtd_news_status_each("Verdadeiro")
+        false = self.qtd_news_status_each("Falso")
+        unverified = self.qtd_news_status_each("Não Checado")
 
-        total = self.qtd_news_register()  # <- Pega o total de notícias gerais
+        # Pega o total de notícias gerais
+        total = self.qtd_news_register()
+        
 
         with open(
             REPORT, "w", encoding="utf-8"
