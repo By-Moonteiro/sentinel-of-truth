@@ -47,7 +47,7 @@ sentinel-of-truth/
 │   │   ├── report.py
 │   │   └── services.py
 │   │
-│   ├── ui/                     # Funções auxiliares
+│   ├── ui/                     # Funções de exibição
 │   │   ├── __init__.py
 │   │   ├── display.py
 │   │   └── menu.py
