@@ -1,10 +1,11 @@
 import os
+import sqlite3
 from pathlib import Path
 
 # Caminhos para os arquivos
 
 DATA = (  # <- Caminho pra Salvar as Notícias
-    Path(__file__).parent.parent.parent / "data" / "saved_news.json"
+    Path(__file__).parent.parent.parent / "data" / "news.db"
 )
 DATA_BACKUP = (  # <- Caminho pro Backup
     Path(__file__).parent.parent.parent / "data" / "saved_news_backup.json"
@@ -12,6 +13,8 @@ DATA_BACKUP = (  # <- Caminho pro Backup
 REPORT = (  # <- Caminho pro Relatório
     Path(__file__).parent.parent.parent / "data" / "relatorio.txt"
 )
+
+
 
 # Status
 
