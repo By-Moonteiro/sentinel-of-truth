@@ -23,6 +23,7 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 - `Módulos e Pacotes`
 - `Persistência de dados`
 - `Estrutura de projeto modular`
+- `SQLite`
 
 ## 🏗️ Estrutura do Projeto
 
@@ -35,23 +36,29 @@ sentinel-of-truth/
 ├── .gitignore
 │
 ├── data/                      # Dados salvos
-│   ├── relatorio.txt          # <- relatório gerado
-│   └── salved_news.json       # <- Notícias salvas
+│   ├── relatorio.txt
+│   └── news.db
 │
-├── src/
+├── src/                       # Classes e lógica principal
 │   ├── __init__.py
-│   ├── logic/               # Classes e lógica principal
+│   ├── logic/               
 │   │   ├── __init__.py
 │   │   ├── manager.py
 │   │   ├── report.py
-│   │   └── news.py
-│   └── utils/              # Funções auxiliares
+│   │   └── services.py
+│   │
+│   ├── ui/                     # Funções auxiliares
+│   │   ├── __init__.py
+│   │   ├── display.py
+│   │   └── menu.py
+│   │
+│   └── utils/                  # Funções auxiliares
 │       ├── __init__.py
 │       ├── config.py
-│       ├── validation.py
-│       └── json_handler.py
+│       ├── helpers.py
+│       └── validation.py
 │
-└── tests/                  # Testes automatizados
+└── tests/                       # Testes automatizados
     └── test.py
 
 ```
@@ -82,5 +89,6 @@ python main.py
 - [X] POO
 - [X] Docstring
 - [X] Manipulação de Arquivos .json | Geração de arquivos .txt
-- [X] CRUD simples
+- [X] CRUD
 - [X] Tipagem
+- [X] SQLite
