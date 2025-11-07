@@ -1,8 +1,6 @@
 import sqlite3
 
 from src.utils.config import DATA
-from src.utils.validation import valid_status
-from .news import News
 
 class ManageNews:
     """
@@ -61,7 +59,7 @@ class ManageNews:
                 )
             return True
             
-    def update_news(self, new_status: str, id: int) -> bool:
+    def update_news(self, new_status: str, news_id: int) -> bool:
         """
         Atualiza os status de uma notícia existente.
 
@@ -72,7 +70,7 @@ class ManageNews:
             with self._conectar() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "UPDATE noticias SET status = ? WHERE id = ?", (new_status, id)
+                    "UPDATE noticias SET status = ? WHERE id = ?", (new_status, news_id)
                     )
                 
             return True
@@ -80,6 +78,14 @@ class ManageNews:
         except:
             print("deu erro boy")
             return False
+        
+    def delete_news(self, news_id: int) -> bool:
+        
+        with self._conectar() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "DELETE FROM noticias WHERE id = ?", (news_id,)
+                )
 
 
     def search_status_news(self, status: str) -> dict:
@@ -93,16 +99,14 @@ class ManageNews:
             dict: Dicionário de Noticias com o status especifico
         """
         
-        try:
-            with self._conectar as conn:
-                cursor = conn.cursor()
-                cursor.execute(
-                    "SELECT * FROM noticias WHERE status = ?", (status)
-                    )
-                return cursor.fetchall()
-        except:
-            return 0, 0, 0
-
+        
+        with self._conectar as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT * FROM noticias WHERE status = ?", (status,)
+                )
+            
+            return cursor.fetchall()
 
     def load_news(self):
 
