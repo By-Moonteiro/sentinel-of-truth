@@ -9,9 +9,6 @@ class ReportNews:
     Obtêm todos os dados do relatório.
 
     Responsável por achar o total de noticias, a quantidade por status + a porcentagem dos status, e exibir tudo
-
-    Attributes:
-        dict: Dicionario com as noticias carregadas
     """
 
     def connection(self) -> dict:
@@ -22,10 +19,10 @@ class ReportNews:
 
     def percent_calculation(self) -> float:
         """
-        Calcula a porcentagem de cada status.
+        Calcula a porcentagem de cada status em relação ao total.
 
         Returns:
-            float: Porcentagem das notícias com status verdadeiro/falso/não verificado individualmente.
+            float: Porcentagem das notícias com status individualmente.
         """
         total = self.qtd_news_register()
         true_news = self.qtd_news_status_each("Verdadeiro")
@@ -48,7 +45,7 @@ class ReportNews:
         Obtêm o total de notícias cadastradas.
 
         Returns:
-            total_news(int): Total de notícias.
+            int: Total de notícias.
         """
         with self.connection() as conn:
             cursor = conn.cursor()
@@ -62,7 +59,7 @@ class ReportNews:
         Obtêm o total de notícias por status.
 
         Returns:
-            int: Total de notícias verdadeiras, falsas e não checadas.
+            int: Total de notícias de acordo com o status.
         """
         with self.connection() as conn:
             cursor = conn.cursor()
