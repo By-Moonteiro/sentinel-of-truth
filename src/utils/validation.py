@@ -26,11 +26,8 @@ def menu_validation(opc: str, start: int, end: int) -> int:
 
         # Verifica no range se é uma opção válida
         if start <= option <= end:
-            valid = True
             return option  # <- Retorna a opção válida
-            
-        return None # <- Fora do range
-        
+
     except ValueError:
         return None # <- Não é um número
 
@@ -52,9 +49,7 @@ def valid_status(status: int) -> str:
     """
     try:
         status = int(status) 
-
-        if status in STATUS:
-            return STATUS.get(status) # <- Status correspondente
+        return STATUS.get(status) # <- Retorna None se nao for válido
 
     except ValueError:
             return None
