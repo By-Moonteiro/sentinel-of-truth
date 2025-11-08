@@ -47,5 +47,20 @@ class InputService:
 
 
 
-class NewsService:
-    pass
+class NewsService(InputService):
+
+    def __init__(self, manager: ManageNews):
+        self.manager = manager
+
+    def register_news(self):
+
+        url = self.input_url()
+        status = self.input_status()
+
+        self.manager.add_news(url, status)
+
+    def edit_news(self):
+        pass
+
+    def remove_news(self):
+        pass
