@@ -9,12 +9,14 @@ class ReportNews:
 
     Responsável por achar o total de noticias, a quantidade por status + a porcentagem dos status, e exibir tudo
     """
+    def __init__(self, manager: ManageNews):
+        self.manager = manager
 
     def connection(self) -> None:
         """
         Carrega a conexão do SQLite.
         """
-        return ManageNews._conectar()
+        return self.manager._conectar()
 
     def percent_calculation(self) -> float:
         """
