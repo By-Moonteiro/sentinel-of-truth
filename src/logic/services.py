@@ -53,13 +53,19 @@ class NewsService(InputService):
     def __init__(self, manager: ManageNews):
         self.manager = manager
 
-    def register_news(self):
-
+    def register_news(self) -> None:
+        """
+        Obtêm os dados da notícia do usuário e adiciona ela ao BD.
+        
+        Returns:
+            None: Adiciona a notícia
+        """
 
         url = self.input_url()
         status = self.input_status()
 
         self.manager.add_news(url, status)
+        return True
 
     def edit_news(self) -> bool:
         """
