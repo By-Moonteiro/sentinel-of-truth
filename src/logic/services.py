@@ -96,5 +96,30 @@ class NewsService(InputService):
 
         
 
-    def remove_news(self):
-        pass
+    def remove_news(self) -> None:
+        """
+        Obtêm o ID da notícia pelo usuário e apaga ela do BD.
+        
+        Returns:
+            None: Deleta a notícia do Banco de Dados
+        """
+        try:
+            news_id = int(input("➤Digite o ID desejado: ").strip())
+
+        except ValueError:
+            print("ID Inválido")
+            return
+        
+        news = self.manager.get_news_by_id(news_id)
+        if not news:
+            print("Nenhuma notícia encontrada com esse ID")
+            return
+        
+        print(f"Id: {news[0]} | Url: {news[1]} | Status: {news[2]}")
+        confirm = input("Tem certeza que deseja deletar a notícia? (s/n): ").strip().lower()
+
+        if confirm == "s":
+            self.manager.delete_news(news_id)
+            print("Noticia deletada com sucesso")
+        else:
+            print("Ação cancelada")
