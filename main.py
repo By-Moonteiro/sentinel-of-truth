@@ -20,7 +20,6 @@ def main() -> None:
     service = NewsService(manager)
     display = Display()
 
-
     running = True
     while running:
         display_main_menu()  # <- Exibe o Menu principal
@@ -41,9 +40,7 @@ def main() -> None:
                     clear_screen()
 
                 elif sub_option == 2:
-                    display.display_news_by_status(
-                        "NOTÍCIAS VERDADEIRAS", "Verdadeiro"
-                    )
+                    display.display_news_by_status("NOTÍCIAS VERDADEIRAS", "Verdadeiro")
                     display.wait_for_enter()
                     clear_screen()
 
@@ -67,7 +64,7 @@ def main() -> None:
                 service.edit_news()  # <- Atualiza o status da notícia
 
             case 4:
-                service.remove_news() # <- Deleta uma notícia
+                service.remove_news()  # <- Deleta uma notícia
 
             case 5:
                 report = ReportNews(manager)  # <- Instância

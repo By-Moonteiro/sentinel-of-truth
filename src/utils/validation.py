@@ -1,5 +1,6 @@
 from .config import STATUS
 
+
 def menu_validation(opc: str, start: int, end: int) -> int:
     """
     Função genérica para validar a opção escolhida em menus interativos.
@@ -28,7 +29,7 @@ def menu_validation(opc: str, start: int, end: int) -> int:
             return option  # <- Retorna a opção válida
 
     except ValueError:
-        return None # <- Não é um número
+        return None  # <- Não é um número
 
 
 def valid_status(status: int) -> str:
@@ -47,8 +48,8 @@ def valid_status(status: int) -> str:
         Opção invalida
     """
     try:
-        status = int(status) 
-        return STATUS.get(status) # <- Retorna None se nao for válido
+        status = int(status)
+        return STATUS.get(status)  # <- Retorna None se nao for válido
 
     except ValueError:
-            return None
+        return None

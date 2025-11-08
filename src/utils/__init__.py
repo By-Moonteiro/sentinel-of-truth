@@ -8,5 +8,5 @@ __all__ = [
     "DATA",
     "STATUS",
     "REPORT",
-    "clear_screen"
+    "clear_screen",
 ]

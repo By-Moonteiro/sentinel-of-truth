@@ -1,5 +1,6 @@
 import os
 
+
 def clear_screen() -> None:
     """
     Limpa o terminal
