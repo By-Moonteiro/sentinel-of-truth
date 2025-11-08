@@ -4,12 +4,12 @@ from src.utils.config import DATA
 
 class ManageNews:
     """
-    Gerencia o ciclo completo das notícias.
+    Gerencia o gerenciamento completo das notícias.
 
-    Responsável por cadastrar, buscar, atualizar e exibir noticias
+    Responsável por: cadastrar, buscar, atualizar e deletar as notícias
 
     Attributes:
-        news (dict): Dicionário no formato {id: [url, status]}
+        data_path(str): Caminho do arquivo para a criação do BD
     """
 
     def __init__(self, data_path=DATA) -> None:
@@ -21,8 +21,7 @@ class ManageNews:
 
     def _conectar(self) -> None:
         """
-        Método interno para:  
-         - Conectar o Banco de Dados
+        Método interno para: Conectar ao Banco de Dados
         """
         return sqlite3.connect(self.data_path)
         
@@ -34,7 +33,7 @@ class ManageNews:
             cursor = conn.cursor() # <- Cria o cursor para gerenciar o BD
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS noticias (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     url TEXT NOT NULL,
                     status TEXT NOT NULL   
                         )
@@ -43,15 +42,22 @@ class ManageNews:
 
     def add_news(self, url: str, status: str) -> bool:
         """
-        Adiciona uma nova notícia ao gerenciador.
+        Adiciona uma nova notícia ao banco de dados.
 
         Args:
-            noticia: Objeto News contendo a url e status
+            url(str): Url da notícia
+            status(str): Status desejado para a respectiva notícia
 
         Returns:
-            None: Cria o dicionário com o ID atribuído á notícia
+            bool: Retorna True se adicionou ou False se não adicionou
+
+        Examples:
+            >>> add_news("www.YouTube.com", "Verdadeiro")
+            True
+            >>> add_news("www.GitHub.com", " ")
+            False
         """
-        with self._conectar() as conn:
+        with self._conectar() as conn: # <- Abre, insere, faz o commit e fecha o BD
             cursor = conn.cursor
             
             cursor.execute(
@@ -59,10 +65,14 @@ class ManageNews:
                 )
             return True
             
-    def update_news(self, new_status: str, news_id: int) -> bool:
+    def update_news(self, news_id: int, new_status: str) -> bool:
         """
         Atualiza os status de uma notícia existente.
 
+        Args:
+            news_id(int): ID da notícia que vai ser atualizada
+            new_status(str): Novo status para a notícia
+        
         Returns:
             bool: True se atualizou, False se não atualizou
         """
@@ -80,7 +90,15 @@ class ManageNews:
             return False
         
     def delete_news(self, news_id: int) -> bool:
-        
+        """
+        Deleta uma notícia permanentemente caso ela exista.
+
+        Args:
+            news_id(int): ID da notícia
+
+        Returns:
+            bool: retorna True Caso tenha deletado com sucesso 
+        """        
         with self._conectar() as conn:
             cursor = conn.cursor()
             cursor.execute(
@@ -88,15 +106,19 @@ class ManageNews:
                 )
 
 
-    def search_status_news(self, status: str) -> dict:
+    def search_status_news(self, status: str) -> list:
         """
         Busca todas as notícias com um status especifico.
 
         Args:
-            status: Status para filtrar (ex: "Verdadeiro", ... , "Não Checado".)
+            status(str): Status para filtrar (ex: "Verdadeiro", ...)
 
         Returns:
-            dict: Dicionário de Noticias com o status especifico
+            list: Lista de tuplas com respectivas informações.
+
+        Examples:
+            >>> search_status_news("Verdadeiro")
+            [(1, "www.YouTube.com", "Verdadeiro"), (3, ...)]
         """
         
         
@@ -108,9 +130,19 @@ class ManageNews:
             
             return cursor.fetchall()
 
-    def load_news(self):
+    def load_news(self) -> list:
+        """
+        Obtêm todas as notícias.
 
+        Returns:
+            list: Lista de tuplas com todas as notícias.
 
+        Examples:
+            >>> load_news()
+            [(1, "www.YouTube.com", "Verdadeiro"), 
+            (2, "www.python.org", "Não Checado"),
+            (3, ...)]
+        """
         with self._conectar() as conn:
             cursor = conn.cursor()
 
