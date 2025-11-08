@@ -96,37 +96,27 @@ class ReportNews:
                 REPORT, "w", encoding="utf-8"
             ) as report:  
                 report.write(
-                    "╔═════════════════════════════════════════════════════════════════════╗\n"
+                    "╔═════════════════════════════════════════════════════════╗\n"
                 )
                 report.write(
-                    "║                              RELATÓRIO                              ║\n"
+                    "║                        RELATÓRIO                        ║\n"
                 )
                 report.write(
-                    "╠═════════════════════════════════════════════════════════════════════╣\n"
+                    "╠═════════════════════════════════════════════════════════╣\n"
+                )
+                report.write(f" Total de Notícias Cadastradas: {total}\n")
+                report.write("\n")
+                report.write(" Distribuição por Status: \n")
+                report.write("\n")
+                report.write(f"  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)\n")
+                report.write(
+                    f"  -> Notícias Falsas: {false} ({percent_false:.1f}%)\n"
                 )
                 report.write(
-                    f"║ Total de Notícias Cadastradas: {total}                                    ║\n"
+                    f"  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)\n"
                 )
                 report.write(
-                    "║                                                                     ║\n"
-                )
-                report.write(
-                    "║ Distribuição por Status:                                            ║\n"
-                )
-                report.write(
-                    "║                                                                     ║\n"
-                )
-                report.write(
-                    f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)                                  ║\n"
-                )
-                report.write(
-                    f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                                       ║\n"
-                )
-                report.write(
-                    f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)                                 ║\n"
-                )
-                report.write(
-                    "╚═════════════════════════════════════════════════════════════════════╝\n"
+                    "╚═════════════════════════════════════════════════════════╝\n"
                 )
             print("Relatório gerado com sucesso!")
 
