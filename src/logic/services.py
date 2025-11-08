@@ -4,6 +4,7 @@ from src.utils import menu_validation, valid_status
 class InputService:
 
     def input_option(self, start: int, end: int) -> int:
+
         while True:
             opc = input("➤ Escolha uma opção: ").strip()
             valid_opc = menu_validation(opc, start, end)
@@ -54,13 +55,40 @@ class NewsService(InputService):
 
     def register_news(self):
 
+
         url = self.input_url()
         status = self.input_status()
 
         self.manager.add_news(url, status)
 
-    def edit_news(self):
-        pass
+    def edit_news(self) -> bool:
+        """
+        Atualiza os status de uma notícia caso ela exista.
+        
+        Returns:
+            bool: True se atualizou, False se não atualizou
+        """
+
+        try:
+            news_id = int(input("➤Digite a Url desejada: ").strip())
+
+        except ValueError:
+            print("ID Inválido")
+            return
+        
+        news = self.manager.get_news_by_id(news_id)
+
+        if news:
+            new_status = self.input_status()
+            self.manager.update_news(news_id, new_status)
+            print(f"Status da notícia: {news[1]} atualizado")
+            return True
+
+        else:
+            print("Nenhuma notícia encontrada com esse ID")
+            return False
+
+        
 
     def remove_news(self):
         pass
