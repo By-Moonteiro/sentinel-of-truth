@@ -1,7 +1,7 @@
 from .manager import ManageNews
 from src.utils import menu_validation, valid_status
 
-class Services:
+class InputService:
 
     def input_option(self, start: int, end: int) -> int:
         while True:
@@ -11,9 +11,9 @@ class Services:
             if valid_opc:
                 return valid_opc
             
-            print("╔════════════════════════════════════════════════╗")
+            print("\n╔══════════════════════════════════════════════════╗")
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
-            print("╚════════════════════════════════════════════════╝")
+            print("╚══════════════════════════════════════════════════╝")
             
 
     def input_status(self):
@@ -28,6 +28,24 @@ class Services:
                 valid = True
                 return valid_stats
             
-            print("╔════════════════════════════════════════════════╗")
+            print("\n╔════════════════════════════════════════════════╗")
             print("➤ Opção inválida! Escolha uma opção Válida.      ")
             print("╚════════════════════════════════════════════════╝")
+
+    def input_url(self):
+
+        close = False
+        while not close:
+            url = input("➤Digite a Url desejada: ").strip()
+            if url:
+                close = True
+                return url
+            
+            print("\n╔════════════════════════════════════════════════╗")
+            print("➤ Esse campo não pode estar vazia..              ")
+            print("╚════════════════════════════════════════════════╝")
+
+
+
+class NewsService:
+    pass
