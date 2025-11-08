@@ -13,4 +13,4 @@ REPORT = (  # <- Caminho pro Relatório
 
 
 # Status
-STATUS = {"1": "Verdadeiro", "2": "Falso", "3": "Não Checado"}
+STATUS = {1: "Verdadeiro", 2: "Falso", 3: "Não Checado"}
