@@ -21,20 +21,18 @@ def menu_validation(opc: str, start: int, end: int) -> int:
 
 
     """
-    valid = False
-    while not valid:
-        try:
-            option = int(opc)  # <- Converte a opção para int para verificar
+    try:
+        option = int(opc)  # <- Converte a opção para int para verificar
 
-            # Verifica no range se é uma opção válida
-            if start <= option <= end:
-                valid = True
-                return option  # <- Retorna a opção válida
+        # Verifica no range se é uma opção válida
+        if start <= option <= end:
+            valid = True
+            return option  # <- Retorna a opção válida
             
-            return None # <- Fora do range
+        return None # <- Fora do range
         
-        except ValueError:
-            return None # <- Não é um número
+    except ValueError:
+        return None # <- Não é um número
 
 
 def valid_status(status: int) -> str:
@@ -52,12 +50,11 @@ def valid_status(status: int) -> str:
         >>> status(4)
         Opção invalida
     """
-    while True:
-        try:
-            status = int(status) 
+    try:
+        status = int(status) 
 
-            if status in STATUS:
-                return STATUS.get(status) # <- Status correspondente
+        if status in STATUS:
+            return STATUS.get(status) # <- Status correspondente
 
-        except ValueError:
-                return None
+    except ValueError:
+            return None
