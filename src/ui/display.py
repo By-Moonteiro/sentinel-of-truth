@@ -50,6 +50,6 @@ class Display:
         print("=" * 60)
 
 
-    def wait_for_enter() -> None:
+    def wait_for_enter(self) -> None:
         """Aguarda o usuário pressionar Enter para continuar"""
         input("\nPronto para voltar? (Enter)")
