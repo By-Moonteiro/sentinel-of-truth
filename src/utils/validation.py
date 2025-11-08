@@ -1,5 +1,4 @@
 from .config import STATUS
-from .helpers import clear_screen
 
 def menu_validation(opc: str, start: int, end: int) -> int:
     """
