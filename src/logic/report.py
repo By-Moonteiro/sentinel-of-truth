@@ -1,8 +1,7 @@
+import sqlite3
+
 from src.utils.config import REPORT
 from .manager import ManageNews
-
-manager = ManageNews()
-
 
 class ReportNews:
     """
@@ -11,7 +10,7 @@ class ReportNews:
     Responsável por achar o total de noticias, a quantidade por status + a porcentagem dos status, e exibir tudo
     """
 
-    def connection(self) -> dict:
+    def connection(self) -> None:
         """
         Carrega a conexão do SQLite.
         """
@@ -75,55 +74,62 @@ class ReportNews:
         """
         Gera o relatório com todos os dados formatados em uma tabela.
         """
+        try:
+            # Pega o percentual de cada status
+            (percent_true, 
+            percent_false, 
+            percent_unverified
+            ) = self.percent_calculation()   
 
-        # Pega o percentual de cada status
-        (percent_true, 
-         percent_false, 
-         percent_unverified
-         ) = self.percent_calculation()   
+            # Pega o total de notícia de cada status
+            true = self.qtd_news_status_each("Verdadeiro")
+            false = self.qtd_news_status_each("Falso")
+            unverified = self.qtd_news_status_each("Não Checado")
 
-        # Pega o total de notícia de cada status
-        true = self.qtd_news_status_each("Verdadeiro")
-        false = self.qtd_news_status_each("Falso")
-        unverified = self.qtd_news_status_each("Não Checado")
+            # Pega o total de notícias gerais
+            total = self.qtd_news_register()
+            
 
-        # Pega o total de notícias gerais
-        total = self.qtd_news_register()
-        
+            with open( # <- Cria/Escreve o relatório
+                REPORT, "w", encoding="utf-8"
+            ) as report:  
+                report.write(
+                    "╔═════════════════════════════════════════════════════════════════════╗\n"
+                )
+                report.write(
+                    "║                              RELATÓRIO                              ║\n"
+                )
+                report.write(
+                    "╠═════════════════════════════════════════════════════════════════════╣\n"
+                )
+                report.write(
+                    f"║ Total de Notícias Cadastradas: {total}                                    ║\n"
+                )
+                report.write(
+                    "║                                                                     ║\n"
+                )
+                report.write(
+                    "║ Distribuição por Status:                                            ║\n"
+                )
+                report.write(
+                    "║                                                                     ║\n"
+                )
+                report.write(
+                    f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)                                  ║\n"
+                )
+                report.write(
+                    f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                                       ║\n"
+                )
+                report.write(
+                    f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)                                 ║\n"
+                )
+                report.write(
+                    "╚═════════════════════════════════════════════════════════════════════╝\n"
+                )
+            print("Relatório gerado com sucesso!")
 
-        with open(
-            REPORT, "w", encoding="utf-8"
-        ) as report:  # <- Cria/Escreve o relatório
-            report.write(
-                "╔═════════════════════════════════════════════════════════════════════╗\n"
-            )
-            report.write(
-                "║                              RELATÓRIO                              ║\n"
-            )
-            report.write(
-                "╠═════════════════════════════════════════════════════════════════════╣\n"
-            )
-            report.write(
-                f"║ Total de Notícias Cadastradas: {total}                                    ║\n"
-            )
-            report.write(
-                "║                                                                     ║\n"
-            )
-            report.write(
-                "║ Distribuição por Status:                                            ║\n"
-            )
-            report.write(
-                "║                                                                     ║\n"
-            )
-            report.write(
-                f"║  -> Notícias Verdadeiras: {true} ({percent_true:.1f}%)                                  ║\n"
-            )
-            report.write(
-                f"║  -> Notícias Falsas: {false} ({percent_false:.1f}%)                                       ║\n"
-            )
-            report.write(
-                f"║  -> Notícias Não Checadas: {unverified} ({percent_unverified:.1f}%)                                 ║\n"
-            )
-            report.write(
-                "╚═════════════════════════════════════════════════════════════════════╝\n"
-            )
+        except (FileNotFoundError, PermissionError) as e:
+            print(f"Erro ao gerar o arquivo do relatório: {e}")
+
+        except (sqlite3.OperationalError, sqlite3.DatabaseError) as e:
+            print(f"Erro no banco de dados: {e}")
