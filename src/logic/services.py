@@ -3,7 +3,16 @@ from src.utils import menu_validation, valid_status
 
 
 class InputService:
+    """
+    Obtêm os dados de input do usuário.
+    """
     def input_option(self, start: int, end: int) -> int:
+        """
+        Obtêm o input do usuário e verifica se está no range válido.
+
+        Returns:
+            int: Opção válida
+        """
         while True:
             opc = input("➤ Escolha uma opção: ").strip()
             valid_opc = menu_validation(opc, start, end)
@@ -15,7 +24,13 @@ class InputService:
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
             print("╚══════════════════════════════════════════════════╝")
 
-    def input_status(self):
+    def input_status(self) -> bool:
+        """
+        Obtêm o input do usuário e verifica o status válido correspondente.
+
+        Returns:
+            bool: True se atualizou
+        """
         valid = False
         while not valid:
             print("Status: [ 1 ]: Verdadeiro | [ 2 ]: Falso | [ 3 ]: Não Checado")
