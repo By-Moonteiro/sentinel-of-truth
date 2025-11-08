@@ -76,7 +76,7 @@ class NewsService(InputService):
         """
 
         try:
-            news_id = int(input("➤Digite a Url desejada: ").strip())
+            news_id = int(input("➤Digite o ID desejado: ").strip())
 
         except ValueError:
             print("ID Inválido")
