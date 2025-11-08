@@ -29,15 +29,26 @@ class ManageNews:
     def create_table(self) -> None:
         """Cria a tabela se não existir"""
 
-        with self._conectar() as conn:
-            cursor = conn.cursor() # <- Cria o cursor para gerenciar o BD
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS noticias (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    url TEXT NOT NULL,
-                    status TEXT NOT NULL   
-                        )
-            """)
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor() # <- Cria o cursor para gerenciar o BD
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS noticias (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        url TEXT NOT NULL,
+                        status TEXT NOT NULL   
+                            )
+                """)
+
+        except sqlite3.IntegrityError as e: # <- Violação de integridade do BD
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e: # <- Problemas de operação
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e: # <- Erro interno do BD
+            print(f"Erro geral no banco: {e}")
+            raise
 
 
     def add_news(self, url: str, status: str) -> bool:
@@ -57,13 +68,25 @@ class ManageNews:
             >>> add_news("www.GitHub.com", " ")
             False
         """
-        with self._conectar() as conn: # <- Abre, insere, faz o commit e fecha o BD
-            cursor = conn.cursor
+        try:
+            with self._conectar() as conn: # <- Abre, insere, faz o commit e fecha o BD
+                cursor = conn.cursor()
+                
+                cursor.execute(
+                    "INSERT INTO noticias (url, status) VALUES (?, ?)", (url, status)
+                    )
+                return True
             
-            cursor.execute(
-                "INSERT INTO noticias (url, status) VALUES (?, ?)", (url, status)
-                )
-            return True
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+
+        return False
             
     def update_news(self, news_id: int, new_status: str) -> bool:
         """
@@ -85,9 +108,16 @@ class ManageNews:
                 
             return True
         
-        except:
-            print("deu erro boy")
-            return False
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+
+        return False
         
     def delete_news(self, news_id: int) -> bool:
         """
@@ -98,12 +128,25 @@ class ManageNews:
 
         Returns:
             bool: retorna True Caso tenha deletado com sucesso 
-        """        
-        with self._conectar() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "DELETE FROM noticias WHERE id = ?", (news_id,)
-                )
+        """
+        try:        
+            with self._conectar() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "DELETE FROM noticias WHERE id = ?", (news_id,)
+                    )
+                return True
+        
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}") 
+
+        return False
 
 
     def search_status_news(self, status: str) -> list:
@@ -121,14 +164,26 @@ class ManageNews:
             [(1, "www.YouTube.com", "Verdadeiro"), (3, ...)]
         """
         
-        
-        with self._conectar as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "SELECT * FROM noticias WHERE status = ?", (status,)
-                )
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT * FROM noticias WHERE status = ?", (status,)
+                    )
+                
+                return cursor.fetchall()
             
-            return cursor.fetchall()
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+        
+        return []
+
 
     def load_news(self) -> list:
         """
@@ -143,11 +198,22 @@ class ManageNews:
             (2, "www.python.org", "Não Checado"),
             (3, ...)]
         """
-        with self._conectar() as conn:
-            cursor = conn.cursor()
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM noticias")
+                cursor.execute("SELECT * FROM noticias")
 
-            return cursor.fetchall() # <- Retorna todas as notícias
+                return cursor.fetchall() # <- Retorna todas as notícias
+        
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
 
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+
+        return []
 
