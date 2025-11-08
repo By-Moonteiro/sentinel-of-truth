@@ -50,6 +50,24 @@ class ManageNews:
             print(f"Erro geral no banco: {e}")
             raise
 
+    def get_news_by_id(self, news_id: int) -> tuple[int, str, str] | None:
+        """
+        Procura uma notícia pelo ID.
+
+        Args:
+            news_id(int): ID da notícia
+
+        Returns:
+            result: Tupla com (id, url, status) se for encontrado
+            ou None se não existir notícia com o ID informado
+        """
+        with self._conectar() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, url, status FROM noticias WHERE id = ?", (news_id,))
+            result = cursor.fetchone()
+
+        return result # <- Retorna None se não existir
+
 
     def add_news(self, url: str, status: str) -> bool:
         """
