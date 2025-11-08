@@ -38,22 +38,26 @@ def main() -> None:
                 if sub_option == 1:  # <- Exibe todas as notícias
                     display.display_all_news()
                     display.wait_for_enter()  # <- Aguarda o usuário pressionar Enter p/ continuar
+                    clear_screen()
 
                 elif sub_option == 2:
                     display.display_news_by_status(
                         "NOTÍCIAS VERDADEIRAS", "Verdadeiro"
                     )
                     display.wait_for_enter()
+                    clear_screen()
 
                 elif sub_option == 3:  # <- Exibe somente as notícias Falsas
                     display.display_news_by_status("NOTÍCIAS FALSAS", "Falso")
                     display.wait_for_enter()
+                    clear_screen()
 
                 elif sub_option == 4:
                     display.display_news_by_status(
                         "NOTÍCIAS NÃO CHECADAS", "não_checado"
                     )
                     display.wait_for_enter()
+                    clear_screen()
 
                 elif sub_option == 5:  # <- Retorna pro Menu Principal
                     clear_screen()
