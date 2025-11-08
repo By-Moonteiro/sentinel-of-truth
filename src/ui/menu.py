@@ -6,8 +6,9 @@ def display_main_menu() -> None:
     print("║ 1 - Cadastrar uma notícia    ║")
     print("║ 2 - Consultar notícias       ║")
     print("║ 3 - Atualizar uma notícia    ║")
-    print("║ 4 - Gerar um relatório       ║")
-    print("║ 5 - Encerar o programa       ║")
+    print("║ 4 - Deletar uma notícia      ║")
+    print("║ 5 - Gerar um relatório       ║")
+    print("║ 6 - Encerar o programa       ║")
     print("╚══════════════════════════════╝")
 
 
