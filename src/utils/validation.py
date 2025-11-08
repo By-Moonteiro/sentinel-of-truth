@@ -1,5 +1,5 @@
 from .config import STATUS
-
+from .helpers import clear_screen
 
 def menu_validation(opc: str, start: int, end: int) -> int:
     """
@@ -30,20 +30,14 @@ def menu_validation(opc: str, start: int, end: int) -> int:
             if start <= option <= end:
                 valid = True
                 return option  # <- Retorna a opção válida
-
-            else:
-                print("╔════════════════════════════════════════════════╗")
-                print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
-                print("╚════════════════════════════════════════════════╝")
-
+            
+            return None # <- Fora do range
+        
         except ValueError:
-            print("╔════════════════════════════════════════════════╗")
-            print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
-            print("╚════════════════════════════════════════════════╝")
-        opc = input("➤ Escolha uma opção: ").strip()
+            return None # <- Não é um número
 
 
-def valid_status() -> str:
+def valid_status(status: int) -> str:
     """
     Solicita e valida o status do usuário
 
@@ -51,15 +45,19 @@ def valid_status() -> str:
         status(str): status válido
 
     Examples:
-        >>> status("1")
+        >>> status(1)
         Status: Verdadeiro
-        >>> status("2")
+        >>> status(2)
         Status: Falso
+        >>> status(4)
+        Opção invalida
     """
     while True:
-        status = input("STATUS: ").strip()
+        try:
+            status = int(status) 
 
-        if status in ["1", "2", "3"]:
-            return STATUS.get(status)  # <- Status correspondente
+            if status in STATUS:
+                return STATUS.get(status) # <- Status correspondente
 
-        print("Opção invalida! Digite 1, 2 ou 3\n")
+        except ValueError:
+                return None
