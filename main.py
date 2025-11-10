@@ -7,8 +7,7 @@ from src.utils.helpers import clear_screen
 
 # --- Interface e exibição ---
 from src.logic.services import InputService, NewsService
-from src.ui.display import Display
-from src.ui.menu import display_main_menu, display_sub_menu
+from src.ui.menu import main_menu, sub_menu, sub_menu_options
 
 
 def main() -> None:
@@ -18,11 +17,10 @@ def main() -> None:
     manager = ManageNews()
     in_service = InputService()
     service = NewsService(manager)
-    display = Display()
 
     running = True
     while running:
-        display_main_menu()  # <- Exibe o Menu principal
+        main_menu()  # <- Exibe o Menu principal
         option = in_service.input_option(1, 6)
 
         match option:
@@ -31,35 +29,12 @@ def main() -> None:
 
             case 2:
                 clear_screen()
-                display_sub_menu()  # <- Exibe o Sub-menu
-                sub_option = in_service.input_option(1, 5)
 
-                if sub_option == 1:  # <- Exibe todas as notícias
-                    display.display_all_news()
-                    display.wait_for_enter()  # <- Aguarda o usuário pressionar Enter p/ continuar
-                    clear_screen()
+                sub_menu()  # <- Exibe o Sub-menu
+                sub_option = in_service.input_option(1, 5) # <- Obtêm a opção
 
-                elif sub_option == 2:
-                    display.display_news_by_status("NOTÍCIAS VERDADEIRAS", "Verdadeiro")
-                    display.wait_for_enter()
-                    clear_screen()
-
-                elif sub_option == 3:  # <- Exibe somente as notícias Falsas
-                    display.display_news_by_status("NOTÍCIAS FALSAS", "Falso")
-                    display.wait_for_enter()
-                    clear_screen()
-
-                elif sub_option == 4:
-                    display.display_news_by_status(
-                        "NOTÍCIAS NÃO CHECADAS", "não_checado"
-                    )
-                    display.wait_for_enter()
-                    clear_screen()
-
-                elif sub_option == 5:  # <- Retorna pro Menu Principal
-                    clear_screen()
-                    continue
-
+                sub_menu_options(sub_option) # <- Exibe as opções do Sub-menu
+                
             case 3:
                 service.edit_news()  # <- Atualiza o status da notícia
 
