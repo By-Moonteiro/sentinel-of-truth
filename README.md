@@ -58,7 +58,7 @@ sentinel-of-truth/
 │       ├── helpers.py
 │       └── validation.py
 │
-└── tests/                       # Testes automatizados
+└── tests/                       # Testes automatizados (vazio)
     └── test.py
 
 ```
@@ -79,7 +79,7 @@ python main.py
 
 ## 📈 Futuros Passos
 
-- [ ]  Adicionar mais requisitos
+- [ ]  ...
 - [ ]  ...
 - [ ]  ...
 - [ ]  ...
