@@ -22,6 +22,7 @@ class NewsController:
         news = News(url, status)
 
         self.manager.add_news(news.url, news.status)
+        print("Notícia salva com sucesso!")
         return True
 
     def edit_news(self) -> bool:
@@ -31,44 +32,38 @@ class NewsController:
         Returns:
             bool: True se atualizou, False se não atualizou
         """
-
-        try:
-            news_id = int(input("➤ Digite o ID da notícia que deseja atualizar: ").strip())
-
-        except ValueError:
-            print("ID Inválido")
-            return
+        news_id = self.input.input_news_id()
 
         news = self.manager.get_news_by_id(news_id)
 
-        if news:
-            new_status = self.input.input_status()
-            self.manager.update_news(news_id, new_status)
-            print(f"Status da notícia: {news[1]} atualizado")
-            return True
-
-        else:
+        if not news:
             print("Nenhuma notícia encontrada com esse ID")
             return False
+        
 
-    def remove_news(self) -> None:
+        new_status = self.input.input_status()
+        self.manager.update_news(news_id, new_status)
+
+        print(f"Status da notícia: {news[1]} atualizado")
+        return True
+
+  
+            
+
+    def remove_news(self) -> bool:
         """
         Obtêm o ID da notícia pelo usuário e apaga ela do BD.
 
         Returns:
-            None: Deleta a notícia do Banco de Dados
+            bool: True se removeu, False se não removeu a notícia do Banco de Dados
         """
-        try:
-            news_id = int(input("➤ Digite o ID da notícia que deseja deletar: ").strip())
-
-        except ValueError:
-            print("ID Inválido")
-            return
+        news_id = self.input.input_news_id()
 
         news = self.manager.get_news_by_id(news_id)
+
         if not news:
             print("Nenhuma notícia encontrada com esse ID")
-            return
+            return False
 
         print(f"Id: {news[0]} | Url: {news[1]} | Status: {news[2]}")
         confirm = (
@@ -78,7 +73,12 @@ class NewsController:
         if confirm == "s":
             self.manager.delete_news(news_id)
             print("Noticia deletada com sucesso")
+            return True
+        
         elif confirm == "n":
             print("Ação cancelada")
+            return False
+
         else:
             print("Ação cancelada! Opção não encontrada, Tente refazer a operação.")
+            return False

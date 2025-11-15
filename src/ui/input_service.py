@@ -74,3 +74,14 @@ class InputService:
             print("╔════════════════════════════════════════════════╗")
             print("➤ Esse campo não pode estar vazia..              ")
             print("╚════════════════════════════════════════════════╝")
+
+
+    def input_news_id(self) -> int:
+         """Pede e valida um ID de notícia"""  
+         while True:
+            news_id = input("➤ Digite o ID da notícia: ").strip()
+
+            if news_id.isdigit():
+                return int(news_id)
+
+            print("ID Inválido.. Digite um numero inteiro.")
