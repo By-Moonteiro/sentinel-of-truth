@@ -1,6 +1,6 @@
 from ..repository.news_repository import NewsRepository
 from ..models.news import News
-from src.ui import InputService
+from src.ui.input_service import InputService
 
 
 class NewsController:

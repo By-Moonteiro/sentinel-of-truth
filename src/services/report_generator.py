@@ -9,8 +9,8 @@ class ReportService:
     Responsável por gerar o .txt com todos os dados específicos. 
     """
 
-    def __init__(self, manager: NewsRepository):
-        self.manager = manager
+    def __init__(self, repository: NewsRepository):
+        self.repository = repository
 
     def percent_calculation(self) -> float:
         """
@@ -19,10 +19,10 @@ class ReportService:
         Returns:
             float: Porcentagem das notícias com status individualmente.
         """
-        total = self.manager.qtd_news_register()
-        true_news = self.manager.qtd_news_status_each("Verdadeiro")
-        false_news = self.manager.qtd_news_status_each("Falso")
-        unverified_news = self.manager.qtd_news_status_each("Não Checado")
+        total = self.repository.qtd_news_register()
+        true_news = self.repository.qtd_news_status_each("Verdadeiro")
+        false_news = self.repository.qtd_news_status_each("Falso")
+        unverified_news = self.repository.qtd_news_status_each("Não Checado")
 
         if total > 0:  # <- Evita divisão por 0
             percent_true = (true_news / total) * 100
@@ -42,16 +42,16 @@ class ReportService:
         try:
             # Pega o percentual de cada status
             (percent_true, percent_false, percent_unverified) = (
-                self.manager.percent_calculation()
+                self.percent_calculation()
             )
 
             # Pega o total de notícia de cada status
-            true = self.manager.qtd_news_status_each("Verdadeiro")
-            false = self.manager.qtd_news_status_each("Falso")
-            unverified = self.manager.qtd_news_status_each("Não Checado")
+            true = self.repository.qtd_news_status_each("Verdadeiro")
+            false = self.repository.qtd_news_status_each("Falso")
+            unverified = self.repository.qtd_news_status_each("Não Checado")
 
             # Pega o total de notícias gerais
-            total = self.manager.qtd_news_register()
+            total = self.repository.qtd_news_register()
 
             with open(  # <- Cria/Escreve o relatório
                 REPORT, "w", encoding="utf-8"
