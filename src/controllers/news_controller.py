@@ -39,16 +39,12 @@ class NewsController:
         if not news:
             print("Nenhuma notícia encontrada com esse ID")
             return False
-        
 
         new_status = self.input.input_status()
         self.manager.update_news(news_id, new_status)
 
         print(f"Status da notícia: {news[1]} atualizado")
         return True
-
-  
-            
 
     def remove_news(self) -> bool:
         """
@@ -74,7 +70,7 @@ class NewsController:
             self.manager.delete_news(news_id)
             print("Noticia deletada com sucesso")
             return True
-        
+
         elif confirm == "n":
             print("Ação cancelada")
             return False

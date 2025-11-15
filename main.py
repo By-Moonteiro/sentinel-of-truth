@@ -18,8 +18,6 @@ def main() -> None:
     menu = MenuController(controller, in_service, manager)
     menu.run()
 
-    
-
 
 if __name__ == "__main__":
     main()

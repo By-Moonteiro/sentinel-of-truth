@@ -2,15 +2,17 @@ from .display import Display
 from src.utils.helpers import clear_screen
 from src.services import ReportService
 
+
 class MenuController:
     """
     Controla o fluxo dos menus
-    
+
     Attributes:
         controller: Classe que liga o UI com o BD
         input_service: Classe que lida com a interação com o usuário (UI)
         repository: Classe que gerencia o BD
     """
+
     def __init__(self, controller, input_service, repository):
         self.controller = controller
         self.in_service = input_service
@@ -30,7 +32,6 @@ class MenuController:
         print("║ 6 - Encerar o programa       ║")
         print("╚══════════════════════════════╝")
 
-
     def sub_menu(self) -> None:
         """Exibe o sub-menu"""
         print("\n╔═════════════════════════════════╗")
@@ -43,8 +44,6 @@ class MenuController:
         print("║ 5 - Retornar                    ║")
         print("╚═════════════════════════════════╝")
 
-        
-
     def sub_menu_options(self, sub_option: int) -> None:
         """
         Exibe opções do sub-menu
@@ -56,7 +55,6 @@ class MenuController:
             None: Executa a opção desejada
         """
         # Instância
-
 
         if sub_option == 1:  # <- Exibe todas as notícias
             self.display.display_all_news()
@@ -74,12 +72,9 @@ class MenuController:
             clear_screen()
 
         elif sub_option == 4:
-            self.display.display_news_by_status(
-                    "NOTÍCIAS NÃO CHECADAS", "Não_Checado"
-                    )
+            self.display.display_news_by_status("NOTÍCIAS NÃO CHECADAS", "Não_Checado")
             self.display.wait_for_enter()
             clear_screen()
-
 
     def run(self) -> None:
         """Roda todo o fluxo principal"""

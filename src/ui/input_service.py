@@ -5,8 +5,9 @@ class InputService:
     """
     Obtêm os dados de input do usuário.
     """
+
     def analyze_int(self, value: str) -> int | None:
-        """"
+        """
         Verifica se o valor passado é inteiro e retorna ele convertido
 
         Args:
@@ -18,10 +19,9 @@ class InputService:
         try:
             int_value = int(value)
             return int_value
-        
+
         except ValueError:
             return None
-        
 
     def input_option(self, start: int, end: int) -> int:
         """
@@ -30,7 +30,7 @@ class InputService:
         Returns:
             int: Opção válida
         """
-        
+
         while True:
             opc = input("➤ Escolha uma opção: ").strip()
             valid_opc = self.analyze_int(opc)
@@ -75,10 +75,9 @@ class InputService:
             print("➤ Esse campo não pode estar vazia..              ")
             print("╚════════════════════════════════════════════════╝")
 
-
     def input_news_id(self) -> int:
-         """Pede e valida um ID de notícia"""  
-         while True:
+        """Pede e valida um ID de notícia"""
+        while True:
             news_id = input("➤ Digite o ID da notícia: ").strip()
 
             if news_id.isdigit():

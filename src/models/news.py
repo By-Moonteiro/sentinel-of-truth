@@ -5,8 +5,8 @@ class News:
     Attributes:
         url(str): Url da notícia
         status(str): Status da notícia
-    """    
+    """
+
     def __init__(self, url: str, status: str) -> None:
         self.url = url
         self.status = status
-

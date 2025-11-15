@@ -6,7 +6,7 @@ class ReportService:
     """
     Obtêm todos os dados e gera o relatório.
 
-    Responsável por gerar o .txt com todos os dados específicos. 
+    Responsável por gerar o .txt com todos os dados específicos.
     """
 
     def __init__(self, repository: NewsRepository):
@@ -33,7 +33,6 @@ class ReportService:
             return 0.0, 0.0, 0.0
 
         return percent_true, percent_false, percent_unverified
-    
 
     def report_generation(self) -> None:
         """

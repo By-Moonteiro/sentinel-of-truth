@@ -264,4 +264,3 @@ class NewsRepository:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) FROM noticias WHERE status = ?", (status,))
             return cursor.fetchone()[0]
-        
