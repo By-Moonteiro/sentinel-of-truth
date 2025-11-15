@@ -229,3 +229,51 @@ class ManageNews:
             print(f"Erro geral no banco: {e}")
 
         return []
+
+    def qtd_news_register(self) -> int:
+        """
+        Obtêm o total de notícias cadastradas.
+
+        Returns:
+            int: Total de notícias.
+        """
+        with self._conectar() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM noticias")
+
+            return cursor.fetchone()[0]
+
+    def qtd_news_status_each(self, status: str) -> int:
+        """
+        Obtêm o total de notícias por status.
+
+        Returns:
+            int: Total de notícias de acordo com o status.
+        """
+        with self._conectar() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM noticias WHERE status = ?", (status,))
+            return cursor.fetchone()[0]
+        
+    def percent_calculation(self) -> float:
+        """
+        Calcula a porcentagem de cada status em relação ao total.
+
+        Returns:
+            float: Porcentagem das notícias com status individualmente.
+        """
+        total = self.qtd_news_register()
+        true_news = self.qtd_news_status_each("Verdadeiro")
+        false_news = self.qtd_news_status_each("Falso")
+        unverified_news = self.qtd_news_status_each("Não Checado")
+
+        if total > 0:  # <- Evita divisão por 0
+            percent_true = (true_news / total) * 100
+            percent_false = (false_news / total) * 100
+            percent_unverified = (unverified_news / total) * 100
+
+        else:
+            return 0.0, 0.0, 0.0
+
+        return percent_true, percent_false, percent_unverified
+
