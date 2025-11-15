@@ -20,7 +20,7 @@ class InputService:
             if valid_opc:
                 return valid_opc
 
-            print("\n╔══════════════════════════════════════════════════╗")
+            print("╔══════════════════════════════════════════════════╗")
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
             print("╚══════════════════════════════════════════════════╝")
 
@@ -34,33 +34,34 @@ class InputService:
         valid = False
         while not valid:
             print("Status: [ 1 ]: Verdadeiro | [ 2 ]: Falso | [ 3 ]: Não Checado")
-            status = input("➤Digite o Status desejado: ").strip()
+            status = input("➤ Digite o Status desejado: ").strip()
             valid_stats = valid_status(status)
 
             if valid_stats:
                 valid = True
                 return valid_stats
 
-            print("\n╔════════════════════════════════════════════════╗")
+            print("╔════════════════════════════════════════════════╗")
             print("➤ Opção inválida! Escolha uma opção Válida.      ")
             print("╚════════════════════════════════════════════════╝")
 
     def input_url(self):
         close = False
         while not close:
-            url = input("➤Digite a Url desejada: ").strip()
+            url = input("➤ Digite a Url desejada: ").strip()
             if url:
                 close = True
                 return url
 
-            print("\n╔════════════════════════════════════════════════╗")
+            print("╔════════════════════════════════════════════════╗")
             print("➤ Esse campo não pode estar vazia..              ")
             print("╚════════════════════════════════════════════════╝")
 
 
-class NewsService(InputService):
-    def __init__(self, manager: ManageNews):
+class NewsService:
+    def __init__(self, manager: ManageNews, in_service: InputService):
         self.manager = manager
+        self.input = in_service
 
     def register_news(self) -> None:
         """
@@ -70,8 +71,8 @@ class NewsService(InputService):
             None: Adiciona a notícia
         """
 
-        url = self.input_url()
-        status = self.input_status()
+        url = self.input.input_url()
+        status = self.input.input_status()
 
         self.manager.add_news(url, status)
         return True
@@ -85,7 +86,7 @@ class NewsService(InputService):
         """
 
         try:
-            news_id = int(input("➤Digite o ID desejado: ").strip())
+            news_id = int(input("➤ Digite o ID desejado: ").strip())
 
         except ValueError:
             print("ID Inválido")
@@ -130,5 +131,7 @@ class NewsService(InputService):
         if confirm == "s":
             self.manager.delete_news(news_id)
             print("Noticia deletada com sucesso")
-        else:
+        elif confirm == "n":
             print("Ação cancelada")
+        else:
+            print("Não tem essa opção! Tente refazer a operação.")
