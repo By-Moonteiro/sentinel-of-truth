@@ -75,7 +75,7 @@ class MenuController:
 
         elif sub_option == 4:
             self.display.display_news_by_status(
-                    "NOTÍCIAS NÃO CHECADAS", "não_checado"
+                    "NOTÍCIAS NÃO CHECADAS", "Não_Checado"
                     )
             self.display.wait_for_enter()
             clear_screen()
