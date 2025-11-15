@@ -3,8 +3,8 @@ from src import NewsRepository
 
 
 class Display:
-    def __init__(self):
-        self.manager = NewsRepository()
+    def __init__(self, repository):
+        self.repository = repository
 
     def display_all_news(self) -> None:
         """Exibe todas as notícias"""
@@ -13,7 +13,7 @@ class Display:
         print("=" * 60)
         print("{:^60}".format("TODAS AS NOTÍCIAS\n"))
 
-        all_news = self.manager.load_news()  # <- Carrega todas as notícias
+        all_news = self.repository.load_news()  # <- Carrega todas as notícias
 
         if not all_news:
             print("Nenhuma notícia cadastrada")
@@ -36,7 +36,7 @@ class Display:
         print("=" * 60)
         print("{:^60}".format(f"{title}\n"))  # <- Cabeçalho
         print("=" * 60)
-        status_news = self.manager.search_status_news(status)
+        status_news = self.repository.search_status_news(status)
 
         if not status_news:
             print("Nenhuma notícia cadastrada")
