@@ -61,14 +61,24 @@ class NewsRepository:
             result: Tupla com (id, url, status) se for encontrado
             ou None se não existir notícia com o ID informado
         """
-        with self._conectar() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "SELECT id, url, status FROM noticias WHERE id = ?", (news_id,)
-            )
-            result = cursor.fetchone()
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT id, url, status FROM noticias WHERE id = ?", (news_id,)
+                )
+                return cursor.fetchone()
+        
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
 
-        return result  # <- Retorna None se não existir
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+
+        return None
 
     def add_news(self, url: str, status: str) -> bool:
         """
