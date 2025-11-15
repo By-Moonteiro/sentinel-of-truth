@@ -1,4 +1,5 @@
 from .manager import ManageNews
+from .news import News
 from src.utils import menu_validation, valid_status
 
 
@@ -63,18 +64,20 @@ class NewsService:
         self.manager = manager
         self.input = in_service
 
-    def register_news(self) -> None:
+    def register_news(self) -> bool:
         """
         Obtêm os dados da notícia do usuário e adiciona ela ao BD.
 
         Returns:
-            None: Adiciona a notícia
+            bool: True se adicionou a notícia
         """
 
         url = self.input.input_url()
         status = self.input.input_status()
 
-        self.manager.add_news(url, status)
+        news = News(url, status)
+
+        self.manager.add_news(news.url, news.status)
         return True
 
     def edit_news(self) -> bool:
@@ -86,7 +89,7 @@ class NewsService:
         """
 
         try:
-            news_id = int(input("➤ Digite o ID desejado: ").strip())
+            news_id = int(input("➤ Digite o ID da notícia que deseja atualizar: ").strip())
 
         except ValueError:
             print("ID Inválido")
@@ -95,7 +98,7 @@ class NewsService:
         news = self.manager.get_news_by_id(news_id)
 
         if news:
-            new_status = self.input_status()
+            new_status = self.input.input_status()
             self.manager.update_news(news_id, new_status)
             print(f"Status da notícia: {news[1]} atualizado")
             return True
@@ -112,7 +115,7 @@ class NewsService:
             None: Deleta a notícia do Banco de Dados
         """
         try:
-            news_id = int(input("➤Digite o ID desejado: ").strip())
+            news_id = int(input("➤Digite o ID da notícia que deseja deletar: ").strip())
 
         except ValueError:
             print("ID Inválido")
@@ -134,4 +137,4 @@ class NewsService:
         elif confirm == "n":
             print("Ação cancelada")
         else:
-            print("Não tem essa opção! Tente refazer a operação.")
+            print("Ação cancelada! Opção não encontrada, Tente refazer a operação.")
