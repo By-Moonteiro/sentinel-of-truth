@@ -30,35 +30,46 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 ```
 sentinel-of-truth/
 │
-├── main.py                 # Ponto de entrada do programa
-├── requirements.txt        # Dependências do projeto (vazio)
+├── main.py                              # Ponto de entrada do programa
+├── requirements.txt                     # Dependências do projeto (vazio)
 ├── README.md
 ├── .gitignore
 │
-├── data/                      # Dados salvos
+├── data/                                # Arquivos persistidos (DB, relatórios)
 │   ├── relatorio.txt
 │   └── news.db
 │
-├── src/                       # Classes e lógica principal
+├── src/                                 # Código-fonte principal do sistema
 │   ├── __init__.py
-│   ├── logic/               
-│   │   ├── __init__.py
-│   │   ├── manager.py
-│   │   ├── report.py
-│   │   └── services.py
 │   │
-│   ├── ui/                     # Funções de exibição
+│   ├── controllers/                     # Orquestram o fluxo do programa; 
+│   │   ├── __init__.py
+│   │   └── news_controller.py
+│   │
+│   ├── models/                          # Modelos/Entidades que representam objetos do domínio
+│   │   ├── __init__.py
+│   │   └── news.py            
+│   │
+│   ├── repository/                      # Camada de  acesso a dados (CRUD no SQLite)
+│   │   ├── __init__.py
+│   │   └── news_repository.py
+│   │
+│   ├── services/                        # Lógica de negócio independente de I/O
+│   │   ├── __init__.py
+│   │   ├── report_generator.py          # Geração e processamento de relatórios
+│   │
+│   ├── ui/                              # Interface do usuário (menus, input e exibição)
 │   │   ├── __init__.py
 │   │   ├── display.py
+│   │   ├── input_service.py   
 │   │   └── menu.py
 │   │
-│   └── utils/                  # Funções auxiliares
+│   └── utils/                           # Funções utilitárias e configurações gerais
 │       ├── __init__.py
 │       ├── config.py
-│       ├── helpers.py
-│       └── validation.py
+│       └── helpers.py
 │
-└── tests/                       # Testes automatizados (vazio)
+└── tests/                               # Testes automatizados (vazio)
     └── test.py
 
 ```

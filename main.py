@@ -1,22 +1,22 @@
 # --- Lógica principal ---
-from src.logic.manager import ManageNews
-from src.logic.report import ReportNews
+from src.repository.news_repository import NewsRepository
+from src.services.report_generator import ReportService
 
 # --- Utilitários gerais ---
-from src.utils.helpers import clear_screen
+from src.utils import clear_screen
 
 # --- Interface e exibição ---
-from src.logic.services import InputService, NewsService
-from src.ui.menu import main_menu, sub_menu, sub_menu_options
+from src.controllers import NewsController
+from src.ui import main_menu, sub_menu, sub_menu_options, InputService
 
 
 def main() -> None:
     """Coordena todo o programa"""
 
     # <- instâncias
-    manager = ManageNews()
+    manager = NewsRepository()
     in_service = InputService()
-    service = NewsService(manager)
+    service = NewsController(manager, in_service)
 
     running = True
     while running:
@@ -42,7 +42,7 @@ def main() -> None:
                 service.remove_news()  # <- Deleta uma notícia
 
             case 5:
-                report = ReportNews(manager)  # <- Instância
+                report = ReportService(manager)  # <- Instância
                 report.report_generation()  # Gera o relatório
 
             case 6:

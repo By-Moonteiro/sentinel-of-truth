@@ -1,15 +1,15 @@
 from src.utils.config import REPORT
-from .manager import ManageNews
+from ..repository.news_repository import NewsRepository
 
 
-class ReportNews:
+class ReportService:
     """
     Obtêm todos os dados e gera o relatório.
 
     Responsável por gerar o .txt com todos os dados específicos. 
     """
 
-    def __init__(self, manager: ManageNews):
+    def __init__(self, manager: NewsRepository):
         self.manager = manager
 
     def percent_calculation(self) -> float:

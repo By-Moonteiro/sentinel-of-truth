@@ -3,7 +3,7 @@ import sqlite3
 from src.utils.config import DATA
 
 
-class ManageNews:
+class NewsRepository:
     """
     Gerencia o gerenciamento completo das notícias.
 

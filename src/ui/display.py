@@ -1,10 +1,10 @@
 from ..utils.helpers import clear_screen
-from src.logic import ManageNews
+from src import NewsRepository
 
 
 class Display:
     def __init__(self):
-        self.manager = ManageNews()
+        self.manager = NewsRepository()
 
     def display_all_news(self) -> None:
         """Exibe todas as notícias"""
