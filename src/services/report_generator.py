@@ -12,7 +12,7 @@ class ReportService:
     def __init__(self, repository: NewsRepository):
         self.repository = repository
 
-    def percent_calculation(self) -> float:
+    def percent_calculation(self) -> tuple[float, float, float]:
         """
         Calcula a porcentagem de cada status em relação ao total.
 
