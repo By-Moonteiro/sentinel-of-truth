@@ -1,5 +1,4 @@
 from ..utils.helpers import clear_screen
-from src import NewsRepository
 
 
 class Display:

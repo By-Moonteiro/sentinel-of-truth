@@ -14,7 +14,7 @@ class MenuController:
     def __init__(self, controller, input_service, repository):
         self.controller = controller
         self.in_service = input_service
-        self.display = Display()
+        self.display = Display(repository)
         self.report = ReportService(repository)
 
     def main_menu(self) -> None:
