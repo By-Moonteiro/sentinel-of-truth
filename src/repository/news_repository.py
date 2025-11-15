@@ -68,7 +68,7 @@ class NewsRepository:
                     "SELECT id, url, status FROM noticias WHERE id = ?", (news_id,)
                 )
                 return cursor.fetchone()
-        
+
         except sqlite3.IntegrityError as e:
             print(f"Erro de integridade: {e}")
 
