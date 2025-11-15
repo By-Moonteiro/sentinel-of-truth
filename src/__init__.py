@@ -2,7 +2,7 @@ from .repository import NewsRepository
 from .services import ReportService
 from .controllers import NewsController
 from .models import News
-from .ui import Display, main_menu, sub_menu, sub_menu_options
+from .ui import Display, MenuController, InputService
 from .utils import REPORT, DATA, STATUS, clear_screen
 
 __all__ = ["NewsRepository", 
@@ -11,9 +11,7 @@ __all__ = ["NewsRepository",
            "NewsController", 
            "News", 
            "Display", 
-           "main_menu", 
-           "sub_menu", 
-           "sub_menu_options",
+           "MenuController", 
            "REPORT",
            "DATA",
            "STATUS",
