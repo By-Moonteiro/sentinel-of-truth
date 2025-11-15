@@ -21,7 +21,13 @@ class ManageNews:
         self.create_table()
 
     def news(self, url: str, status: str) -> None:
-        """Cria o objeto da notícia"""
+        """
+        Cria o objeto da notícia.
+
+        Args:
+            url(str): Url dada pelo usuário
+            status(str): Status desejado
+        """
         self.url = url
         self.status = status
 
