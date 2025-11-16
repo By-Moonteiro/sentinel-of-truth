@@ -1,4 +1,4 @@
-from src.utils import STATUS
+from src.utils import STATUS, MAX_URL_LENGTH
 
 
 class InputService:
@@ -64,16 +64,26 @@ class InputService:
             print("╚════════════════════════════════════════════════╝")
 
     def input_url(self):
+        
         close = False
         while not close:
             url = input("➤ Digite a Url desejada: ").strip()
-            if url:
-                close = True
-                return url
 
-            print("╔════════════════════════════════════════════════╗")
-            print("➤ Esse campo não pode estar vazia..              ")
-            print("╚════════════════════════════════════════════════╝")
+            if  not url: # Caso o usuário não digite nada
+                print("╔════════════════════════════════════════════════╗")
+                print("➤ Esse campo não pode estar vazia..              ")
+                print("╚════════════════════════════════════════════════╝")
+                continue # Volta ao topo do loop
+            
+            if len(url) > MAX_URL_LENGTH: # Caso o usuário digite uma URL com + de 500 caracteres
+                print("╔═════════════════════════════════════════════════════════════════════════════════╗")
+                print(f"➤ URL muito longa! O limite máximo é de {MAX_URL_LENGTH} caracteres. Tente novamente.")
+                print("╚═════════════════════════════════════════════════════════════════════════════════╝")
+                continue 
+
+            # Retorna a URL após passar pelas 2 verificações
+            close = True
+            return url
 
     def input_news_id(self) -> int:
         """Pede e valida um ID de notícia"""
