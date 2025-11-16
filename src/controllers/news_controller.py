@@ -21,9 +21,14 @@ class NewsController:
 
         news = News(url, status)
 
-        self.manager.add_news(news.url, news.status)
-        print("Notícia salva com sucesso!")
-        return True
+        success = self.manager.add_news(news)
+
+        if success:
+            print("Notícia salva com sucesso!")
+            return True
+        else:
+            print("Erro! Não foi possível salvar a notícia.")
+            return False
 
     def edit_news(self) -> bool:
         """
