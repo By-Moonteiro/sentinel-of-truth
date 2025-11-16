@@ -80,7 +80,9 @@ class InputService:
         while True:
             news_id = input("➤ Digite o ID da notícia: ").strip()
 
-            if news_id.isdigit():
+            valid_id = self.analyze_int(news_id)
+
+            if valid_id is not None and valid_id > 0:
                 return int(news_id)
 
-            print("ID Inválido.. Digite um numero inteiro.")
+            print("ID Inválido.. Digite um numero inteiro positivo.")
