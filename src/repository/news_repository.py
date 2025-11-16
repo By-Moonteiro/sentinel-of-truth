@@ -247,11 +247,23 @@ class NewsRepository:
         Returns:
             int: Total de notícias.
         """
-        with self._conectar() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM noticias")
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM noticias")
 
-            return cursor.fetchone()[0]
+                return cursor.fetchone()[0]
+            
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+
+        return 0
 
     def qtd_news_status_each(self, status: str) -> int:
         """
@@ -260,7 +272,19 @@ class NewsRepository:
         Returns:
             int: Total de notícias de acordo com o status.
         """
-        with self._conectar() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM noticias WHERE status = ?", (status,))
-            return cursor.fetchone()[0]
+        try:
+            with self._conectar() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM noticias WHERE status = ?", (status,))
+                return cursor.fetchone()[0]
+        
+        except sqlite3.IntegrityError as e:
+            print(f"Erro de integridade: {e}")
+
+        except sqlite3.OperationalError as e:
+            print(f"Erro operacional: {e}")
+
+        except sqlite3.DatabaseError as e:
+            print(f"Erro geral no banco: {e}")
+            
+        return 0
