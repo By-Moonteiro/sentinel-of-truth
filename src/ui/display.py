@@ -9,8 +9,8 @@ class Display:
         """Exibe todas as notícias"""
 
         clear_screen()
-        print("=" * 60)
-        print("{:^60}".format("TODAS AS NOTÍCIAS\n"))
+        print("=" * 90)
+        print("{:^90}".format("TODAS AS NOTÍCIAS\n"))
 
         all_news = self.repository.load_news()  # <- Carrega todas as notícias
 
@@ -20,7 +20,7 @@ class Display:
             for news_id, url, status in all_news:
                 print(f"Id: {news_id} | Url: {url} | Status: {status}")
 
-        print("=" * 60)
+        print("=" * 90)
 
     def display_news_by_status(self, title: str, status: str) -> None:
         """
@@ -32,9 +32,9 @@ class Display:
             status(str): Status desejado para a exibição
         """
         clear_screen()
-        print("=" * 60)
-        print("{:^60}".format(f"{title}\n"))  # <- Cabeçalho
-        print("=" * 60)
+        print("=" * 90)
+        print("{:^90}".format(f"{title}\n"))  # <- Cabeçalho
+        print("=" * 90)
         status_news = self.repository.search_status_news(status)
 
         if not status_news:
@@ -43,7 +43,7 @@ class Display:
             for news_id, url, status_value in status_news:
                 print(f"Id: {news_id} | Url: {url} | Status: {status_value}")
 
-        print("=" * 60)
+        print("=" * 90)
 
     def wait_for_enter(self) -> None:
         """Aguarda o usuário pressionar Enter para continuar"""
