@@ -63,8 +63,13 @@ class InputService:
             print("➤ Opção inválida! Escolha uma opção Válida.      ")
             print("╚════════════════════════════════════════════════╝")
 
-    def input_url(self):
-        
+    def input_url(self) -> str:
+        """
+        Obtêm a URL do usuário e retorna uma opção válida
+
+        Returns:
+            url(str): URL devidamente tratada
+        """
         close = False
         while not close:
             url = input("➤ Digite a Url desejada: ").strip()
