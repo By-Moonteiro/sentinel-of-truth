@@ -1,6 +1,7 @@
 import sqlite3
 
 from src.utils.config import DATA
+from src.models import News
 
 
 class NewsRepository:
@@ -80,13 +81,12 @@ class NewsRepository:
 
         return None
 
-    def add_news(self, url: str, status: str) -> bool:
+    def add_news(self, news: News) -> bool:
         """
         Adiciona uma nova notícia ao banco de dados.
 
         Args:
-            url(str): Url da notícia
-            status(str): Status desejado para a respectiva notícia
+            news(News): Recebe o objeto News contendo url e status
 
         Returns:
             bool: Retorna True se adicionou ou False se não adicionou
@@ -102,7 +102,7 @@ class NewsRepository:
                 cursor = conn.cursor()
 
                 cursor.execute(
-                    "INSERT INTO noticias (url, status) VALUES (?, ?)", (url, status)
+                    "INSERT INTO noticias (url, status) VALUES (?, ?)", (news.url, news.status)
                 )
                 return True
 
