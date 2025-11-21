@@ -101,5 +101,5 @@ python main.py
 - [X] Docstring
 - [X] Manipulação de Arquivos .json | Geração de arquivos .txt
 - [X] CRUD
-- [X] Tipagem
+- [X] Type hints
 - [X] SQLite
