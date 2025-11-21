@@ -16,5 +16,5 @@ __all__ = [
     "REPORT",
     "DATA",
     "STATUS",
-    "clear_screen",
+    "clear_screen"
 ]

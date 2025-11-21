@@ -6,7 +6,7 @@ from src.models import News
 
 class NewsRepository:
     """
-    Gerencia o gerenciamento completo das notícias.
+    Faz o gerenciamento completo das notícias.
 
     Responsável por: cadastrar, buscar, atualizar e deletar as notícias
 
@@ -16,7 +16,7 @@ class NewsRepository:
 
     def __init__(self, data_path=DATA) -> None:
         """ "
-        Cria a tabela se não existir, sempre que iniciar
+        Cria a tabela caso ela não exista, sempre que iniciar
         """
         self.data_path = data_path
         self.create_table()
@@ -27,8 +27,13 @@ class NewsRepository:
         """
         return sqlite3.connect(self.data_path)
 
-    def create_table(self) -> None:
-        """Cria a tabela se não existir"""
+    def create_table(self) -> bool:
+        """
+        Cria a tabela se não existir
+
+        Returns:
+            bool: True se ocorreu o planejado, False se deu algum erro
+        """
 
         try:
             with self._conectar() as conn:
@@ -40,16 +45,19 @@ class NewsRepository:
                         status TEXT NOT NULL   
                             )
                 """)
+                return True
 
         except sqlite3.IntegrityError as e:  # <- Violação de integridade do BD
             print(f"Erro de integridade: {e}")
-
+            
         except sqlite3.OperationalError as e:  # <- Problemas de operação
             print(f"Erro operacional: {e}")
 
         except sqlite3.DatabaseError as e:  # <- Erro interno do BD
             print(f"Erro geral no banco: {e}")
             raise
+
+        return False
 
     def get_news_by_id(self, news_id: int) -> tuple[int, str, str] | None:
         """

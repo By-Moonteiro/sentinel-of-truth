@@ -54,7 +54,6 @@ class MenuController:
         Returns:
             None: Executa a opção desejada
         """
-        # Instância
 
         if sub_option == 1:  # <- Exibe todas as notícias
             self.display.display_all_news()

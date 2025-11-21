@@ -17,7 +17,7 @@ class ReportService:
         Calcula a porcentagem de cada status em relação ao total.
 
         Returns:
-            float: Porcentagem das notícias com status individualmente.
+            tuple: Tupla com a porcentagem das notícias com status individualmente.
         """
         total = self.repository.qtd_news_register()
         true_news = self.repository.qtd_news_status_each("Verdadeiro")

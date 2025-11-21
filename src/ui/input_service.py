@@ -91,7 +91,12 @@ class InputService:
             return url
 
     def input_news_id(self) -> int:
-        """Pede e valida um ID de notícia"""
+        """
+        Pede e valida um ID de notícia
+        
+        Returns:
+            int: ID inteiro e maior que 0
+        """
         while True:
             news_id = input("➤ Digite o ID da notícia: ").strip()
 

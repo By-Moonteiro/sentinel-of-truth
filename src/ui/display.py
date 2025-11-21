@@ -2,11 +2,17 @@ from ..utils.helpers import clear_screen
 
 
 class Display:
+    """
+    Responsável por exibir as notícias de forma organizada para o usuário.
+
+    Attributes:
+        repository: Classe que gerencia o BD
+    """
     def __init__(self, repository):
         self.repository = repository
 
     def display_all_news(self) -> None:
-        """Exibe todas as notícias"""
+        """Exibe todas as notícias gerais"""
 
         clear_screen()
         print("=" * 90)

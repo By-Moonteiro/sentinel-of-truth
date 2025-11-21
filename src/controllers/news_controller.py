@@ -4,6 +4,13 @@ from src.ui.input_service import InputService
 
 
 class NewsController:
+    """
+    Faz a interação do usuário (UI) com o repository (BD)
+
+    Attributes:
+        manager: Classe que interage com o BD
+        in_service: Classe UI que pega e valida a entrada do usuário
+    """
     def __init__(self, manager: NewsRepository, in_service: InputService):
         self.manager = manager
         self.input = in_service
