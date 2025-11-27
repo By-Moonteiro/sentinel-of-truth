@@ -5,7 +5,7 @@ import os
 from src.utils import DATA
 
 # --- Lógica principal ---
-from src.repository.news_repository import NewsRepository
+from src.repository.sqlite_news_repository import SQLiteNewsRepository
 
 # --- Interface e exibição ---
 from src.controllers import NewsController
@@ -21,12 +21,12 @@ def main() -> None:
         os.makedirs(data_direct) # <- Cria a pasta se ela não existir
 
     # instâncias
-    manager = NewsRepository()
+    sqlite_manager = SQLiteNewsRepository()
     in_service = InputService()
-    controller = NewsController(manager, in_service)
+    controller = NewsController(sqlite_manager, in_service)
 
     # Exibição do programa
-    menu = MenuController(controller, in_service, manager)
+    menu = MenuController(controller, in_service, sqlite_manager)
     menu.run()
 
 

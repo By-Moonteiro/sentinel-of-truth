@@ -1,3 +1,4 @@
-from .news_repository import NewsRepository
+from .sqlite_news_repository import SQLiteNewsRepository
+from .abstract_repository import AbstractNewsRepository
 
-__all__ = ["NewsRepository"]
+__all__ = ["SQLiteNewsRepository", "AbstractNewsRepository"]

@@ -1,5 +1,5 @@
 from src.utils.config import REPORT
-from ..repository.news_repository import NewsRepository
+from ..repository.abstract_repository import AbstractNewsRepository
 
 
 class ReportService:
@@ -9,7 +9,7 @@ class ReportService:
     Responsável por gerar o .txt com todos os dados específicos.
     """
 
-    def __init__(self, repository: NewsRepository):
+    def __init__(self, repository: AbstractNewsRepository):
         self.repository = repository
 
     def percent_calculation(self) -> tuple[float, float, float]:

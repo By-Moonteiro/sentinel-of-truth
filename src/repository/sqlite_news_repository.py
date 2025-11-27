@@ -1,10 +1,11 @@
 import sqlite3
 
+from .abstract_repository import AbstractNewsRepository
 from src.utils.config import DATA
 from src.models import News
 
 
-class NewsRepository:
+class SQLiteNewsRepository(AbstractNewsRepository):
     """
     Faz o gerenciamento completo das notícias.
 

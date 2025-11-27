@@ -1,4 +1,4 @@
-from ..repository.news_repository import NewsRepository
+from ..repository.abstract_repository import AbstractNewsRepository
 from ..models.news import News
 from src.ui.input_service import InputService
 
@@ -11,7 +11,7 @@ class NewsController:
         manager: Classe que interage com o BD
         in_service: Classe UI que pega e valida a entrada do usuário
     """
-    def __init__(self, manager: NewsRepository, in_service: InputService):
+    def __init__(self, manager: AbstractNewsRepository, in_service: InputService):
         self.manager = manager
         self.input = in_service
 
