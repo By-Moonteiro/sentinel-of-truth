@@ -24,6 +24,7 @@ Ele faz parte do meu aprendizado contínuo em **Python** e boas práticas de pro
 - `Persistência de dados`
 - `Estrutura de projeto modular`
 - `SQLite`
+- `ABC (Abstract Classes)`
 
 ## 🏗️ Estrutura do Projeto
 
@@ -52,7 +53,8 @@ sentinel-of-truth/
 │   │
 │   ├── repository/                      # Camada de  acesso a dados (CRUD no SQLite)
 │   │   ├── __init__.py
-│   │   └── news_repository.py
+│   │   ├── abstract_repository.py
+│   │   └── sqlite_news_repository.py
 │   │
 │   ├── services/                        # Lógica de negócio independente de I/O
 │   │   ├── __init__.py
@@ -103,3 +105,5 @@ python main.py
 - [X] CRUD
 - [X] Type hints
 - [X] SQLite
+- [X] ABC (Abstract Classes)
+- [X] Princípios SOLID (S/O/D)
