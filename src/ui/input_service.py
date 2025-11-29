@@ -1,4 +1,4 @@
-from src.utils import STATUS, MAX_URL_LENGTH, CONFIRM
+from src.utils import STATUS, MAX_URL_LENGTH
 
 
 class InputService:
