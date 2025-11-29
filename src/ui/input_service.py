@@ -1,4 +1,4 @@
-from src.utils import STATUS, MAX_URL_LENGTH
+from src.utils import STATUS, MAX_URL_LENGTH, CONFIRM
 
 
 class InputService:
@@ -41,6 +41,26 @@ class InputService:
             print("╔══════════════════════════════════════════════════╗")
             print(f"➤ Opção inválida! Escolha uma opção entre {start} e {end}.")
             print("╚══════════════════════════════════════════════════╝")
+
+
+    def confirm_input(self) -> bool:
+        """
+        Solicita confirmação da ação pro usuário.
+
+        Returns:
+            bool: True se o usuário confirmou. False caso contrário
+        """
+        print("[ 1 ] Sim | [ 2 ] Não")
+        confirm = (
+            input("Tem certeza que deseja efetuar a ação? ").strip().lower()
+        )
+
+        if confirm in ("s", "1","sim"):
+            return True
+        
+        
+        return False
+            
 
     def input_status(self) -> bool:
         """

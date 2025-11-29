@@ -3,6 +3,7 @@ from ..models.news import News
 from src.ui.input_service import InputService
 
 
+
 class NewsController:
     """
     Faz a interação do usuário (UI) com o repository (BD)
@@ -74,19 +75,15 @@ class NewsController:
             return False
 
         print(f"Id: {news[0]} | Url: {news[1]} | Status: {news[2]}")
-        confirm = (
-            input("Tem certeza que deseja deletar a notícia? (s/n): ").strip().lower()
-        )
 
-        if confirm == "s":
-            self.manager.delete_news(news_id)
-            print("Noticia deletada com sucesso")
-            return True
+        confirm = self.input.confirm_input()
 
-        elif confirm == "n":
-            print("Ação cancelada")
+        if not confirm :
+            print("Ação cancelada!")
             return False
-
-        else:
-            print("Ação cancelada! Opção não encontrada, Tente refazer a operação.")
-            return False
+        
+        
+        self.manager.delete_news(news_id)
+        print("Noticia deletada com sucesso")
+        return True
+            
